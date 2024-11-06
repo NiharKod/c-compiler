@@ -1,4 +1,4 @@
-test1          : Simple Hello Program                : 0   of 1  
+test1          : Simple Hello Program                : 1   of 1  
 global         : Simple Test for Global Variables    : 0   of 3  
 local          : Simple Test for Local Variables     : 0   of 4  
 args           : Simple Test for Arguments           : 0   of 4  
@@ -30,4 +30,4 @@ char2          : Array char assignment               : 0   of 3
 strlen         : Compute strlen                      : 0   of 3  
 quicksortstr   : Quicksort with strings              : 0   of 4  
 queens         : 8 queens problem                    : 0   of 3  
-                              Total:  0 of 100
+                              Total:  1 of 100
