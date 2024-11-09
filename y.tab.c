@@ -1449,7 +1449,7 @@ yyreduce:
 			if (nglobals < MAX_GLOBALS){
 				global_vars_table[nglobals] = strdup((yyvsp[0].string_val));
 				nglobals++;
-				fprintf(fasm, "hello world\n", (yyvsp[0].string_val));
+				fprintf(fasm, "hello world\n");
 				//fprintf(fasm, "section .bss\n .comm %s, 8\n", $1);
 			}
 			//exit if otherwise
