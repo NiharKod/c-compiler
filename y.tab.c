@@ -1464,7 +1464,7 @@ yyreduce:
 			if (nglobals < MAX_GLOBALS){
 				global_vars_table[nglobals] = strdup((yyvsp[0].string_val));
 				nglobals++;
-				fprintf(fasm, "section .bss\n .comm %s, 8\n", (yyvsp[0].string_val))
+				fprintf(fasm, "section .bss\n .comm %s, 8\n", (yyvsp[0].string_val));
 			}
 			//exit if otherwise
 }
