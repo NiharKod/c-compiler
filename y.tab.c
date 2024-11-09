@@ -1447,7 +1447,7 @@ yyreduce:
                       {
 			// check if there is enough space
 			if (nglobals < MAX_GLOBALS){
-				global_var_list[nglobals] = strdup((yyvsp[0].string_val))
+				global_var_table[nglobals] = strdup((yyvsp[0].string_val))
 				nglobals++;
 				fprintf(fasm, "section .bss\n .comm %s, 8\n", (yyvsp[0].string_val));
 			}
@@ -1461,7 +1461,7 @@ yyreduce:
                             {
 			// check if there is enough space
 			if (nglobals < MAX_GLOBALS){
-				global_var_list[nglobals] = strdup((yyvsp[0].string_val))
+				global_var_table[nglobals] = strdup((yyvsp[0].string_val))
 				nglobals++;
 				fprintf(fasm, "section .bss\n .comm %s, 8\n", (yyvsp[0].string_val));
 			}
