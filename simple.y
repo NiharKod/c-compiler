@@ -125,7 +125,7 @@ global_var:
 global_var_list: WORD {
 			// check if there is enough space
 			if (nglobals < MAX_GLOBALS){
-				global_var_table[nglobals] = strdup($1);
+				global_vars_table[nglobals] = strdup($1);
 				nglobals++;
 				fprintf(fasm, "section .bss\n .comm %s, 8\n", $1);
 			}
@@ -134,7 +134,7 @@ global_var_list: WORD {
 | global_var_list COMA WORD {
 			// check if there is enough space
 			if (nglobals < MAX_GLOBALS){
-				global_var_table[nglobals] = strdup($3);
+				global_vars_table[nglobals] = strdup($3);
 				nglobals++;
 				fprintf(fasm, "section .bss\n .comm %s, 8\n", $3);
 			}
