@@ -123,8 +123,22 @@ global_var:
         var_type global_var_list SEMICOLON;
 
 global_var_list: WORD {
+			// check if there is enough space
+			if (nglobals < MAX_GLOBALS){
+				global_var_list[nglobals] = strdup($1)
+				nglobals++;
+				fprintf(fasm, "section .bss\n .comm %s, 8\n", $1);
+			}
+			//exit if otherwise
         }
 | global_var_list COMA WORD {
+			// check if there is enough space
+			if (nglobals < MAX_GLOBALS){
+				global_var_list[nglobals] = strdup($1)
+				nglobals++;
+				fprintf(fasm, "section .bss\n .comm %s, 8\n", $1);
+			}
+			//exit if otherwise
 }
         ;
 
