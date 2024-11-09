@@ -1,5 +1,6 @@
 
-long g;
+long g,j,f;
+
 
 void main()
 {
