@@ -738,12 +738,12 @@ static const yytype_int16 yyrline[] =
 {
        0,    63,    63,    67,    70,    71,    72,    77,    76,   111,
      112,   116,   117,   120,   123,   125,   134,   145,   145,   145,
-     145,   145,   148,   149,   153,   176,   179,   186,   187,   191,
-     195,   196,   200,   201,   205,   206,   207,   211,   212,   213,
-     214,   215,   219,   220,   228,   235,   236,   244,   245,   249,
-     265,   266,   273,   274,   275,   283,   287,   291,   292,   296,
-     298,   299,   303,   304,   305,   306,   307,   308,   314,   308,
-     325,   326,   328,   332,   333,   337,   338,   339
+     145,   145,   148,   154,   158,   181,   184,   191,   192,   196,
+     200,   201,   205,   206,   210,   211,   212,   216,   217,   218,
+     219,   220,   224,   225,   233,   240,   241,   249,   250,   254,
+     270,   271,   278,   279,   280,   288,   292,   296,   297,   301,
+     303,   304,   308,   309,   310,   311,   312,   313,   319,   313,
+     330,   331,   333,   337,   338,   342,   343,   344
 };
 #endif
 
@@ -1470,8 +1470,19 @@ yyreduce:
 #line 1471 "y.tab.c"
     break;
 
+  case 22: /* assignment: WORD EQUAL expression  */
+#line 148 "simple.y"
+                               {
+			char *id = (yyvsp[-2].string_val);
+			fprintf(fasm, "movq %%rbx, %s\n", id);
+			top = 0;
+
+		 }
+#line 1482 "y.tab.c"
+    break;
+
   case 24: /* call: WORD LPARENT call_arguments RPARENT  */
-#line 153 "simple.y"
+#line 158 "simple.y"
                                               {
 		 char * funcName = (yyvsp[-3].string_val);
 		 int nargs = (yyvsp[-1].nargs);
@@ -1492,39 +1503,39 @@ yyreduce:
 		 fprintf(fasm, "\tmovq %%rax, %%%s\n", regStk[top]);
 		 top++;
          }
-#line 1496 "y.tab.c"
+#line 1507 "y.tab.c"
     break;
 
   case 25: /* call_arg_list: expression  */
-#line 176 "simple.y"
+#line 181 "simple.y"
                     {
 		(yyval.nargs)=1;
 	 }
-#line 1504 "y.tab.c"
+#line 1515 "y.tab.c"
     break;
 
   case 26: /* call_arg_list: call_arg_list COMA expression  */
-#line 179 "simple.y"
+#line 184 "simple.y"
                                          {
 		(yyval.nargs)++;
 	 }
-#line 1512 "y.tab.c"
+#line 1523 "y.tab.c"
     break;
 
   case 27: /* call_arguments: call_arg_list  */
-#line 186 "simple.y"
+#line 191 "simple.y"
                        { (yyval.nargs)=(yyvsp[0].nargs); }
-#line 1518 "y.tab.c"
+#line 1529 "y.tab.c"
     break;
 
   case 28: /* call_arguments: %empty  */
-#line 187 "simple.y"
+#line 192 "simple.y"
                      { (yyval.nargs)=0;}
-#line 1524 "y.tab.c"
+#line 1535 "y.tab.c"
     break;
 
   case 43: /* additive_expr: additive_expr PLUS multiplicative_expr  */
-#line 220 "simple.y"
+#line 225 "simple.y"
                                                    {
 		fprintf(fasm,"\n\t# +\n");
 		if (top<nregStk) {
@@ -1533,19 +1544,19 @@ yyreduce:
 			top--;
 		}
 	  }
-#line 1537 "y.tab.c"
+#line 1548 "y.tab.c"
     break;
 
   case 44: /* additive_expr: additive_expr MINUS multiplicative_expr  */
-#line 229 "simple.y"
+#line 234 "simple.y"
           {
 		
 	  }
-#line 1545 "y.tab.c"
+#line 1556 "y.tab.c"
     break;
 
   case 46: /* multiplicative_expr: multiplicative_expr TIMES primary_expr  */
-#line 236 "simple.y"
+#line 241 "simple.y"
                                                    {
 		fprintf(fasm,"\n\t# *\n");
 		if (top<nregStk) {
@@ -1554,11 +1565,11 @@ yyreduce:
 			top--;
 		}
           }
-#line 1558 "y.tab.c"
+#line 1569 "y.tab.c"
     break;
 
   case 49: /* primary_expr: STRING_CONST  */
-#line 249 "simple.y"
+#line 254 "simple.y"
                        {
 		  // Add string to string table.
 		  // String table will be produced later
@@ -1575,11 +1586,11 @@ yyreduce:
 		  }
 		  nstrings++;
 	  }
-#line 1579 "y.tab.c"
+#line 1590 "y.tab.c"
     break;
 
   case 51: /* primary_expr: WORD  */
-#line 266 "simple.y"
+#line 271 "simple.y"
                  {
 		  // Assume it is a global variable
 		  // TODO: Implement also local variables
@@ -1587,11 +1598,11 @@ yyreduce:
 		  fprintf(fasm, "\tmovq %s, %%%s\n", id, regStk[top]);
 		  top++;
 	  }
-#line 1591 "y.tab.c"
+#line 1602 "y.tab.c"
     break;
 
   case 54: /* primary_expr: INTEGER_CONST  */
-#line 275 "simple.y"
+#line 280 "simple.y"
                           {
 		  fprintf(fasm, "\n\t# push %s\n", (yyvsp[0].string_val));
 		  if (top<nregStk) {
@@ -1600,58 +1611,58 @@ yyreduce:
 			top++;
 		  }
 	  }
-#line 1604 "y.tab.c"
+#line 1615 "y.tab.c"
     break;
 
   case 63: /* statement: call SEMICOLON  */
-#line 304 "simple.y"
+#line 309 "simple.y"
                           { top= 0; /* Reset register stack */ }
-#line 1610 "y.tab.c"
+#line 1621 "y.tab.c"
     break;
 
   case 67: /* $@2: %empty  */
-#line 308 "simple.y"
+#line 313 "simple.y"
                          {
 		// act 1
 		(yyvsp[-1].my_nlabel)=nlabel;
 		nlabel++;
 		fprintf(fasm, "while_start_%d:\n", (yyvsp[-1].my_nlabel));
          }
-#line 1621 "y.tab.c"
+#line 1632 "y.tab.c"
     break;
 
   case 68: /* $@3: %empty  */
-#line 314 "simple.y"
+#line 319 "simple.y"
                             {
 		// act2
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
 		fprintf(fasm, "\tje while_end_%d\n", (yyvsp[-4].my_nlabel));
 		top--;
          }
-#line 1632 "y.tab.c"
+#line 1643 "y.tab.c"
     break;
 
   case 69: /* statement: WHILE LPARENT $@2 expression RPARENT $@3 statement  */
-#line 320 "simple.y"
+#line 325 "simple.y"
                    {
 		// act3
 		fprintf(fasm, "\tjmp while_start_%d\n", (yyvsp[-6].my_nlabel));
 		fprintf(fasm, "while_end_%d:\n", (yyvsp[-6].my_nlabel));
 	 }
-#line 1642 "y.tab.c"
+#line 1653 "y.tab.c"
     break;
 
   case 77: /* jump_statement: RETURN expression SEMICOLON  */
-#line 339 "simple.y"
+#line 344 "simple.y"
                                        {
 		 fprintf(fasm, "\tmovq %%rbx, %%rax\n");
 		 top = 0;
 	 }
-#line 1651 "y.tab.c"
+#line 1662 "y.tab.c"
     break;
 
 
-#line 1655 "y.tab.c"
+#line 1666 "y.tab.c"
 
       default: break;
     }
@@ -1844,7 +1855,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 345 "simple.y"
+#line 350 "simple.y"
 
 
 void yyset_in (FILE *  in_str );
