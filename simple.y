@@ -323,6 +323,7 @@ primary_expr:
 
 		  if (local_var != -1){
 			//means it is local variable
+			nlocals++;
 			fprintf(fasm, "\tmovq -%d(%%rbp), %%%s\n", 8 * (local_var + 1), regStk[top]);
 		  } 
 		  else {
