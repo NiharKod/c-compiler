@@ -1584,7 +1584,7 @@ yyreduce:
 		  // Assume it is a global variable
 		  // TODO: Implement also local variables
 		  char * id = (yyvsp[0].string_val);
-		  fprintf(fasm, "\tmovq $%s,%%%s hello blablablfaffdd\n", id, regStk[top]);
+		  fprintf(fasm, "\tmovq $%s,%%%s\n", id, regStk[top]);
 		  top++;
 	  }
 #line 1591 "y.tab.c"
