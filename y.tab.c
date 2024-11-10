@@ -1626,7 +1626,7 @@ yyreduce:
 
 		  if (local_var != -1){
 			//means it is local variable
-			fprintf(fasm, "\tmovq -&d(%%rbp), %%%s\n", 8 * (local_var + 1), regStk[top]);
+			fprintf(fasm, "\tmovq -%d(%%rbp), %%%s\n", 8 * (local_var + 1), regStk[top]);
 		  } 
 		  else {
 			fprintf(fasm, "\tmovq %s, %%%s\n", id, regStk[top]);
