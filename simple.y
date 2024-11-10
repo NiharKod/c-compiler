@@ -127,7 +127,7 @@ global_var_list: WORD {
 			if (nglobals < MAX_GLOBALS){
 				global_vars_table[nglobals] = strdup($1);
 				nglobals++;
-				fprintf(fasm, "section .bss\n .comm %s, 8\n", $1);
+				fprintf(fasm, "section .data\n .comm %s, 8\n", $1);
 			}
 			//exit if otherwise
         }
