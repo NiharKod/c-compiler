@@ -147,7 +147,7 @@ var_type: CHARSTAR | CHARSTARSTAR | LONG | LONGSTAR | VOID;
 assignment:
          WORD EQUAL expression {
 			char *id = $<string_val>1;
-			fprintf(fasm, "\tmovq %%rbx, $%s\n", id);
+			fprintf(fasm, "\tmovq %%rbx, %s\n", id);
 			top = 0;
 
 		 }
@@ -272,7 +272,7 @@ primary_expr:
 		  // Assume it is a global variable
 		  // TODO: Implement also local variables
 		  char * id = $<string_val>1;
-		  fprintf(fasm, "\tmovq $%s, %%%s\n", id, regStk[top]);
+		  fprintf(fasm, "\tmovq %s, %%%s\n", id, regStk[top]);
 		  top++;
 	  }
 	  | WORD LBRACE expression RBRACE
