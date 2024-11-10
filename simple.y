@@ -172,7 +172,8 @@ assignment:
 			if (local_var != -1){
 				//means it is local variable
 				//nlocals++;
-				fprintf(fasm, "\tmovq %%rbx, -%d(%%rbp)\n", 8 * (local_var + 1));
+				fprintf(fasm, "\tmovq %%%s%%, -%d(%%rbp)\n", regStk[top-1], 8 * (local_var + 1));
+				top--;
 			} else {
 				fprintf(fasm, "\tmovq %%rbx, %s\n", id);
 				top = 0;
