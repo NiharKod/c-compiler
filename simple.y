@@ -272,7 +272,7 @@ primary_expr:
 		  // Assume it is a global variable
 		  // TODO: Implement also local variables
 		  char * id = $<string_val>1;
-		  fprintf(fasm, "\tmovq %s, %%%s\n", id, regStk[top]);
+		  fprintf(fasm, "\tmovq $%s, %%%s\n", id, regStk[top]);
 		  top++;
 	  }
 	  | WORD LBRACE expression RBRACE
