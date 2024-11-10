@@ -1618,7 +1618,7 @@ yyreduce:
 		  // TODO: Implement also local variables
 		  int local_var = -1;
 		  for (int i = 0; i < nlocals; i++){
-			if (strcmp(id, local_vars_table[i] == 0){
+			if (strcmp(id, local_vars_table[i] == 0)){
 				local_var = i;
 				break;
 			}
