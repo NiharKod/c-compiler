@@ -41,7 +41,7 @@ char * global_vars_table[MAX_GLOBALS];
 
 #define MAX_LOCALS 32
 int nlocals = 0;
-char *local_vars_table[MAX_LOCALS]l
+char *local_vars_table[MAX_LOCALS];
 
 #define MAX_STRINGS 100
 int nstrings = 0;
@@ -86,7 +86,7 @@ function:
 
 		 fprintf(fasm, "\t# Save Frame pointer\n");
 		 fprintf(fasm, "\tpushq %%rbp\n");
-                 fprintf(fasm, "\tmovq %%rsp,%%rbp\n");
+         fprintf(fasm, "\tmovq %%rsp,%%rbp\n");
 
 		 fprintf(fasm, "# Save registers. \n");
 		 fprintf(fasm, "# Push one extra to align stack to 16bytes\n");
@@ -96,13 +96,13 @@ function:
 		 fprintf(fasm, "\tpushq %%r13\n");
 		 fprintf(fasm, "\tpushq %%r14\n");
 		 fprintf(fasm, "\tpushq %%r15\n");
-		 fprintf(fsm, "\tsubq $%d, %%rsp\n, MAX_LOCALS*8");
+		 fprintf(fasm, "\tsubq $%d, %%rsp\n, MAX_LOCALS*8");
 
 	 }
 	 LPARENT arguments RPARENT compound_statement
          {
 		 fprintf(fasm, "# Restore registers\n");
-		 fprintf(fsm, "\taddq $%d, %%rsp\n, MAX_LOCALS*8");
+		 fprintf(fasm, "\taddq $%d, %%rsp\n, MAX_LOCALS*8");
 		 fprintf(fasm, "\tpopq %%r15\n");
 		 fprintf(fasm, "\tpopq %%r14\n");
 		 fprintf(fasm, "\tpopq %%r13\n");
