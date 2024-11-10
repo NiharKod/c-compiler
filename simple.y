@@ -96,13 +96,13 @@ function:
 		 fprintf(fasm, "\tpushq %%r13\n");
 		 fprintf(fasm, "\tpushq %%r14\n");
 		 fprintf(fasm, "\tpushq %%r15\n");
-		 fprintf(fasm, "\tsubq $%d, %%rsp\n", MAX_LOCALS*8");
+		 fprintf(fasm, "\tsubq $%d, %%rsp\n", MAX_LOCALS*8);
 
 	 }
 	 LPARENT arguments RPARENT compound_statement
          {
 		 fprintf(fasm, "# Restore registers\n");
-		 fprintf(fasm, "\taddq $%d, %%rsp\n", MAX_LOCALS*8");
+		 fprintf(fasm, "\taddq $%d, %%rsp\n", MAX_LOCALS*8);
 		 fprintf(fasm, "\tpopq %%r15\n");
 		 fprintf(fasm, "\tpopq %%r14\n");
 		 fprintf(fasm, "\tpopq %%r13\n");
