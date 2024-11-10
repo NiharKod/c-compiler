@@ -1,8 +1,8 @@
 test1          : Simple Hello Program                : 1   of 1  
 global         : Simple Test for Global Variables    : 3   of 3  
 local          : Simple Test for Local Variables     : 4   of 4  
-args           : Simple Test for Arguments           : 0   of 4  
-return         : Simple Test for Arguments           : 0   of 3  
+args           : Simple Test for Arguments           : 4   of 4  
+return         : Simple Test for Arguments           : 3   of 3  
 nested         : Test for nested function            : 0   of 3  
 div            : Test for division                   : 0   of 3  
 expr           : Test expression                     : 0   of 3  
@@ -30,4 +30,4 @@ char2          : Array char assignment               : 0   of 3
 strlen         : Compute strlen                      : 0   of 3  
 quicksortstr   : Quicksort with strings              : 0   of 4  
 queens         : 8 queens problem                    : 0   of 3  
-                              Total:  8 of 100
+                              Total:  15 of 100
