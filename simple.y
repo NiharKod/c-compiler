@@ -156,7 +156,7 @@ assignment:
 			char *id = $<string_val>1;
 			int local_var = -1;
 			for (int i = 0; i < nlocals; i++){
-				if (strcmp(id, local_vars_table[i] == 0){
+				if (strcmp(id, local_vars_table[i]) == 0){
 					local_var = i;
 					break;
 				}
