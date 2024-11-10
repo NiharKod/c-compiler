@@ -172,7 +172,7 @@ assignment:
 			}
 			if (local_var != -1){
 				//means it is local variable
-				fprintf(fasm, "\tmovq %%rbx, -(48 + %d)(%%rbp)\n", 8 * (local_var + 1) );
+				fprintf(fasm, "\tmovq %%rbx, -%d(%%rbp)\n", 8 * (local_var + 1));
 			} else {
 				fprintf(fasm, "\tmovq %%rbx, %s\n", id);
 				top = 0;
@@ -312,7 +312,7 @@ primary_expr:
 
 		  if (local_var != -1){
 			//means it is local variable
-			fprintf(fasm, "\tmovq -(48 + %d)(%%rbp), %%%s\n", 8 * (local_var + 1), regStk[top]);
+			fprintf(fasm, "\tmovq -%d(%%rbp), %%%s\n", 8 * (local_var + 1), regStk[top]);
 		  } 
 		  else {
 			fprintf(fasm, "\tmovq %s, %%%s\n", id, regStk[top]);
