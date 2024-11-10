@@ -336,7 +336,7 @@ local_var:
         var_type local_var_list SEMICOLON;
 
 local_var_list: WORD {
-			assert(nlocals < MAXLOCALS);
+			assert(nlocals < MAX_LOCALS);
 			local_vars_table[nlocals] = $<string_val>1;
 			nlocals++;
 		}
