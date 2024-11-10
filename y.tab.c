@@ -1652,7 +1652,7 @@ yyreduce:
   case 60: /* local_var_list: WORD  */
 #line 338 "simple.y"
                      {
-			assert(nlocals < MAXLOCALS);
+			assert(nlocals < MAX_LOCALS);
 			local_vars_table[nlocals] = (yyvsp[0].string_val);
 			nlocals++;
 		}
