@@ -88,7 +88,7 @@ function:
 		 fprintf(fasm, "\t# Save Frame pointer\n");
 		 fprintf(fasm, "\tpushq %%rbp\n");
          fprintf(fasm, "\tmovq %%rsp,%%rbp\n");
-
+		 fprintf(fasm, "\tsubq $%d, %%rsp\n", MAX_LOCALS*8);
 		 fprintf(fasm, "# Save registers. \n");
 		 fprintf(fasm, "# Push one extra to align stack to 16bytes\n");
          fprintf(fasm, "\tpushq %%rbx\n");
@@ -97,7 +97,6 @@ function:
 		 fprintf(fasm, "\tpushq %%r13\n");
 		 fprintf(fasm, "\tpushq %%r14\n");
 		 fprintf(fasm, "\tpushq %%r15\n");
-		 fprintf(fasm, "\tsubq $%d, %%rsp\n", MAX_LOCALS*8);
 
 	 }
 	 LPARENT arguments RPARENT compound_statement
