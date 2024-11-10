@@ -136,7 +136,7 @@ global_var_list: WORD {
 			if (nglobals < MAX_GLOBALS){
 				global_vars_table[nglobals] = strdup($3);
 				nglobals++;
-				fprintf(fasm, "section .bss\n .comm %s, 8\n", $3);
+				fprintf(fasm, " .comm %s, 8\n", $3);
 			}
 			//exit if otherwise
 }
@@ -147,7 +147,7 @@ var_type: CHARSTAR | CHARSTARSTAR | LONG | LONGSTAR | VOID;
 assignment:
          WORD EQUAL expression {
 			char *id = $<string_val>1;
-			fprintf(fasm, "\tmovq %%rbx, $%s\n", id);
+			fprintf(fasm, "\tmovq %%%s, %s\n", regStk[top-1], id);
 			top = 0;
 
 		 }
@@ -275,7 +275,7 @@ primary_expr:
 		  fprintf(fasm, "\tmovq %s, %%%s\n", id, regStk[top]);
 		  top++;
 	  }
-	  | WORD LBRACE expression RBRACE
+	  | WORD LBRACE expression RBRACE 
 	  | AMPERSAND WORD
 	  | INTEGER_CONST {
 		  fprintf(fasm, "\n\t# push %s\n", $<string_val>1);
