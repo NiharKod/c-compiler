@@ -125,7 +125,16 @@ arguments:
 	 | /*empty*/
 	 ;
 
-arg: var_type WORD;
+arg: var_type WORD {
+	// put args in the stack and treat as local vars
+	if (nargs < MAX_ARGS){
+		args_table[nargs] = strdup($2);
+		nargs++;
+		//add to reg stack
+		fprintf(fasm, "movq %%%s, -%d(%%rbp)", regArg[nargs], 8*(nlocals+1));
+		nlocals++;
+	}
+};
 
 global_var: 
         var_type global_var_list SEMICOLON;
