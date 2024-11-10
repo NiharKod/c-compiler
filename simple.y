@@ -126,10 +126,13 @@ arguments:
 	 ;
 
 arg: var_type WORD {
+	if (nlocals < MAX_LOCALS){
 		local_vars_table[nlocals] = strdup($2);
 		fprintf(fasm, "\tmovq %%%s, -%d(%%rbp)\n", regArgs[nargs], 8*(nlocals+1));
 		nargs++;
 		nlocals++;
+	}
+		
 };
 
 global_var: 
