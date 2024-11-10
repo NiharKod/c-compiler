@@ -97,13 +97,13 @@ function:
 		 fprintf(fasm, "\tpushq %%r13\n");
 		 fprintf(fasm, "\tpushq %%r14\n");
 		 fprintf(fasm, "\tpushq %%r15\n");
-		 fprintf(fasm, "\tsubq $%d, %%rsp\n", MAX_LOCALS*8 + 48);
+		 fprintf(fasm, "\tsubq $%d, %%rsp\n", MAX_LOCALS*8);
 
 	 }
 	 LPARENT arguments RPARENT compound_statement
          {
 		 fprintf(fasm, "# Restore registers\n");
-		 fprintf(fasm, "\taddq $%d, %%rsp\n", MAX_LOCALS*8 + 48);
+		 fprintf(fasm, "\taddq $%d, %%rsp\n", MAX_LOCALS*8);
 		 fprintf(fasm, "\tpopq %%r15\n");
 		 fprintf(fasm, "\tpopq %%r14\n");
 		 fprintf(fasm, "\tpopq %%r13\n");
@@ -172,7 +172,7 @@ assignment:
 			}
 			if (local_var != -1){
 				//means it is local variable
-				fprintf(fasm, "\tmovq %%rbx, -%d(%%rbp)\n", 8 * (local_var + 1));
+				fprintf(fasm, "\tmovq %%rbx, -(48 + %d)(%%rbp)\n", 8 * (local_var + 1) );
 			} else {
 				fprintf(fasm, "\tmovq %%rbx, %s\n", id);
 				top = 0;
@@ -312,7 +312,7 @@ primary_expr:
 
 		  if (local_var != -1){
 			//means it is local variable
-			fprintf(fasm, "\tmovq -%d(%%rbp), %%%s\n", 8 * (local_var + 1), regStk[top]);
+			fprintf(fasm, "\tmovq -(48 + %d)(%%rbp), %%%s\n", 8 * (local_var + 1), regStk[top]);
 		  } 
 		  else {
 			fprintf(fasm, "\tmovq %s, %%%s\n", id, regStk[top]);
