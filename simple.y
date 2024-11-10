@@ -147,7 +147,7 @@ var_type: CHARSTAR | CHARSTARSTAR | LONG | LONGSTAR | VOID;
 assignment:
          WORD EQUAL expression {
 			char *id = $<string_val>1;
-			fprintf(fasm, "\tmovq %%rbx, %s\n", id);
+			fprintf(fasm, "\tmovq %%rbx, $%s\n", id);
 			top = 0;
 
 		 }
