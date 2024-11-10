@@ -39,6 +39,10 @@ char * args_table[MAX_ARGS];
 int nglobals = 0;
 char * global_vars_table[MAX_GLOBALS];
 
+#define MAX_LOCALS 32
+int nlocals = 0;
+char *local_vars_table[MAX_LOCALS]l
+
 #define MAX_STRINGS 100
 int nstrings = 0;
 char * string_table[MAX_STRINGS];
@@ -75,6 +79,7 @@ function_or_var_list:
 function:
          var_type WORD
          {
+		 nlocals = 0;
 		 fprintf(fasm, "\t.text\n");
 		 fprintf(fasm, ".globl %s\n", $2);
 		 fprintf(fasm, "%s:\n", $2);
@@ -91,11 +96,13 @@ function:
 		 fprintf(fasm, "\tpushq %%r13\n");
 		 fprintf(fasm, "\tpushq %%r14\n");
 		 fprintf(fasm, "\tpushq %%r15\n");
+		 fprintf(fsm, "\tsubq $%d, %%rsp\n, MAX_LOCALS*8");
 
 	 }
 	 LPARENT arguments RPARENT compound_statement
          {
 		 fprintf(fasm, "# Restore registers\n");
+		 fprintf(fsm, "\taddq $%d, %%rsp\n, MAX_LOCALS*8");
 		 fprintf(fasm, "\tpopq %%r15\n");
 		 fprintf(fasm, "\tpopq %%r14\n");
 		 fprintf(fasm, "\tpopq %%r13\n");
@@ -147,9 +154,21 @@ var_type: CHARSTAR | CHARSTARSTAR | LONG | LONGSTAR | VOID;
 assignment:
          WORD EQUAL expression {
 			char *id = $<string_val>1;
-			//fprintf(fasm, "\tmovq %%%s, %s\n", regStk[top-1], id);
-			fprintf(fasm, "\tmovq %%rbx, %s\n", id);
-			top = 0;
+			int local_var = -1;
+			for (int i = 0; i < nlocals; i++){
+				if (strcmp(id, local_vars_table[i] == 0){
+					local_var = i;
+					break;
+				}
+			}
+			if (local_var != -1){
+				//means it is local variable
+				fprintf(fasm, "\tmovq %%rbx, -%d(%%rbp)\n", 8 * (local_var + 1));
+			} else {
+				fprintf(fasm, "\tmovq %%rbx, %s\n", id);
+				top = 0;
+			}
+
 	
 		 }
 	 | WORD LBRACE expression RBRACE EQUAL expression
@@ -270,10 +289,25 @@ primary_expr:
 	  }
           | call
 	  | WORD {
+		  char * id = $<string_val>1;
+		  // ID may be local or global variable
 		  // Assume it is a global variable
 		  // TODO: Implement also local variables
-		  char * id = $<string_val>1;
-		  fprintf(fasm, "\tmovq %s, %%%s\n", id, regStk[top]);
+		  int local_var = -1;
+		  for (int i = 0; i < nlocals; i++){
+			if (strcmp(id, local_vars_table[i] == 0){
+				local_var = i;
+				break;
+			}
+		  }
+
+		  if (local_var != -1){
+			//means it is local variable
+			fprintf(fasm, "\tmovq -&d(%%rbp), %%%s\n", 8 * (local_var + 1), regStk[top]);
+		  } 
+		  else {
+			fprintf(fasm, "\tmovq %s, %%%s\n", id, regStk[top]);
+		  }
 		  top++;
 	  }
 	  | WORD LBRACE expression RBRACE 
@@ -301,7 +335,11 @@ statement_list:
 local_var:
         var_type local_var_list SEMICOLON;
 
-local_var_list: WORD
+local_var_list: WORD {
+			assert(nlocals < MAXLOCALS);
+			local_vars_table[nlocals] = $<string_val>1;
+			nlocals++;
+		}
         | local_var_list COMA WORD
         ;
 
