@@ -127,13 +127,11 @@ arguments:
 
 arg: var_type WORD {
 	// put args in the stack and treat as local vars
-	if (nargs < MAX_ARGS){
 		args_table[nargs] = strdup($2);
 		//add to reg stack
-		fprintf(fasm, "movq %%%s, -%d(%%rbp)", regArgs[nargs], 8*(nlocals+1));
 		nargs++;
+		fprintf(fasm, "movq %%%s, -%d(%%rbp)", regArgs[nargs], 8*(nlocals+1));
 		nlocals++;
-	}
 };
 
 global_var: 
