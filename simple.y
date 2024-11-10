@@ -131,7 +131,7 @@ arg: var_type WORD {
 		args_table[nargs] = strdup($2);
 		nargs++;
 		//add to reg stack
-		fprintf(fasm, "movq %%%s, -%d(%%rbp)", regArg[nargs], 8*(nlocals+1));
+		fprintf(fasm, "movq %%%s, -%d(%%rbp)", regArgs[nargs], 8*(nlocals+1));
 		nlocals++;
 	}
 };
