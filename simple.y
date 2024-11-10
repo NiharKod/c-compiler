@@ -171,6 +171,7 @@ assignment:
 			}
 			if (local_var != -1){
 				//means it is local variable
+				nlocals++;
 				fprintf(fasm, "\tmovq %%rbx, -%d(%%rbp)\n", 8 * (local_var + 1));
 			} else {
 				fprintf(fasm, "\tmovq %%rbx, %s\n", id);
