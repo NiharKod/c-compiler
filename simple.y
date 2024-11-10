@@ -145,7 +145,12 @@ global_var_list: WORD {
 var_type: CHARSTAR | CHARSTARSTAR | LONG | LONGSTAR | VOID;
 
 assignment:
-         WORD EQUAL expression
+         WORD EQUAL expression {
+			char *id = $<string_val>1;
+			fprintf(fasm, "movq %%rbx, %s\n", id);
+			top = 0;
+
+		 }
 	 | WORD LBRACE expression RBRACE EQUAL expression
 	 ;
 
