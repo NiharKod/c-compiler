@@ -129,8 +129,8 @@ arg: var_type WORD {
 	// put args in the stack and treat as local vars
 		local_vars_table[nlocals] = strdup($2);
 		//add to reg stack
-		nargs++;
 		fprintf(fasm, "\tmovq %%%s, -%d(%%rbp)\n", regArgs[nargs], 8*(nlocals+1));
+		nargs++;
 		nlocals++;
 };
 
