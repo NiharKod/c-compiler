@@ -260,7 +260,12 @@ additive_expr:
 	  }
 	  | additive_expr MINUS multiplicative_expr
 	  {
-		
+		fprintf(fasm,"\n\t# -\n");
+		if (top<nregStk) {
+			fprintf(fasm, "\tsubq %%%s,%%%s\n", 
+				regStk[top-1], regStk[top-2]);
+			top--;
+		}
 	  }
 	  ;
 
