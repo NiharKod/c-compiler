@@ -91,19 +91,19 @@ function:
 
 		 fprintf(fasm, "# Save registers. \n");
 		 fprintf(fasm, "# Push one extra to align stack to 16bytes\n");
-                 fprintf(fasm, "\tpushq %%rbx\n");
+         fprintf(fasm, "\tpushq %%rbx\n");
 		 fprintf(fasm, "\tpushq %%rbx\n");
 		 fprintf(fasm, "\tpushq %%r10\n");
 		 fprintf(fasm, "\tpushq %%r13\n");
 		 fprintf(fasm, "\tpushq %%r14\n");
 		 fprintf(fasm, "\tpushq %%r15\n");
-		 fprintf(fasm, "\tsubq $%d, %%rsp\n", MAX_LOCALS*8);
+		 fprintf(fasm, "\tsubq $%d, %%rsp\n", MAX_LOCALS*8 + 48);
 
 	 }
 	 LPARENT arguments RPARENT compound_statement
          {
 		 fprintf(fasm, "# Restore registers\n");
-		 fprintf(fasm, "\taddq $%d, %%rsp\n", MAX_LOCALS*8);
+		 fprintf(fasm, "\taddq $%d, %%rsp\n", MAX_LOCALS*8 + 48);
 		 fprintf(fasm, "\tpopq %%r15\n");
 		 fprintf(fasm, "\tpopq %%r14\n");
 		 fprintf(fasm, "\tpopq %%r13\n");
