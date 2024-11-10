@@ -279,14 +279,7 @@ multiplicative_expr:
 			top--;
 		}
           }
-	  | multiplicative_expr DIVIDE primary_expr {
-		fprintf(fasm,"\n\t# div\n");
-		if (top<nregStk) {
-			fprintf(fasm, "\tidivq %%%s,%%%s\n", 
-				regStk[top-1], regStk[top-2]);
-			top--;
-		}
-	  }
+	  | multiplicative_expr DIVIDE primary_expr {}
 	  | multiplicative_expr PERCENT primary_expr
 	  ;
 
@@ -323,7 +316,6 @@ primary_expr:
 
 		  if (local_var != -1){
 			//means it is local variable
-			nlocals++;
 			fprintf(fasm, "\tmovq -%d(%%rbp), %%%s\n", 8 * (local_var + 1), regStk[top]);
 		  } 
 		  else {
