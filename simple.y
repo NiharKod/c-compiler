@@ -102,14 +102,14 @@ function:
 	 LPARENT arguments RPARENT compound_statement
          {
 		 fprintf(fasm, "# Restore registers\n");
-		 fprintf(fasm, "\taddq $%d, %%rsp\n", MAX_LOCALS*8);
 		 fprintf(fasm, "\tpopq %%r15\n");
 		 fprintf(fasm, "\tpopq %%r14\n");
 		 fprintf(fasm, "\tpopq %%r13\n");
 		 fprintf(fasm, "\tpopq %%r10\n");
 		 fprintf(fasm, "\tpopq %%rbx\n");
-                 fprintf(fasm, "\tpopq %%rbx\n");
-                 fprintf(fasm, "\tleave\n");
+         fprintf(fasm, "\tpopq %%rbx\n");
+		 fprintf(fasm, "\taddq $%d, %%rsp\n", MAX_LOCALS*8);
+         fprintf(fasm, "\tleave\n");
 		 fprintf(fasm, "\tret\n");
          }
 	;
