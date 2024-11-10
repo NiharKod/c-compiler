@@ -267,7 +267,7 @@ primary_expr:
 		  // Assume it is a global variable
 		  // TODO: Implement also local variables
 		  char * id = $<string_val>1;
-		  fprintf(fasm, "\tmovq $%s, %%%s\n", id, regStk[top]);
+		  fprintf(fasm, "\tmovq %s, %%%s\n", id, regStk[top]);
 		  top++;
 	  }
 	  | WORD LBRACE expression RBRACE
@@ -275,7 +275,7 @@ primary_expr:
 	  | INTEGER_CONST {
 		  fprintf(fasm, "\n\t# push %s\n", $<string_val>1);
 		  if (top<nregStk) {
-			fprintf(fasm, "\tmovq %s,%%%s\n", 
+			fprintf(fasm, "\tmovq $%s,%%%s\n", 
 				$<string_val>1, regStk[top]);
 			top++;
 		  }
