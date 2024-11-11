@@ -244,10 +244,22 @@ equality_expr:
 
 relational_expr:
          additive_expr
-	 | relational_expr LESS additive_expr
-	 | relational_expr GREAT additive_expr
-	 | relational_expr LESSEQUAL additive_expr
-	 | relational_expr GREATEQUAL additive_expr
+	 | relational_expr LESS additive_expr {
+			fprintf(fasm, "\t # < \n");
+			fprintf(fasm, "\t cmpq %%%s, %%%s\n", regStk[top-2], regStk[top-1]);
+			fprintf(fasm, "\t jle less\n")
+			fprintf(fasm, "\t movq $0, %%%s\n", regStk[top-2]);
+			fprintf(fasm, "\t less:\n movq $1, %%%s\n", regStk[top-2]);
+	 }
+	 | relational_expr GREAT additive_expr {
+
+	 }
+	 | relational_expr LESSEQUAL additive_expr {
+
+	 }
+	 | relational_expr GREATEQUAL additive_expr {
+
+	 }
 	 ;
 
 additive_expr:
