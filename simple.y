@@ -238,8 +238,25 @@ logical_and_expr:
 
 equality_expr:
          relational_expr
-	 | equality_expr EQUALEQUAL relational_expr
-	 | equality_expr NOTEQUAL relational_expr
+	 | equality_expr EQUALEQUAL relational_expr {
+			fprintf(fasm, "\t # == \n");
+			fprintf(fasm, "\t cmpq %%%s, %%%s\n", regStk[top-1], regStk[top-2]);
+			fprintf(fasm, "\t movq $1, %%r12\n");
+			fprintf(fasm, "\t movq $0, %%r11\n");
+			fprintf(fasm, "\t cmove %%r12, %%%s\n", regStk[top-2]);
+			fprintf(fasm, "\t cmovne %%r11, %%%s\n", regStk[top-2]);
+			top--;
+
+	 }
+	 | equality_expr NOTEQUAL relational_expr {
+			printf(fasm, "\t # != \n");
+			fprintf(fasm, "\t cmpq %%%s, %%%s\n", regStk[top-1], regStk[top-2]);
+			fprintf(fasm, "\t movq $1, %%r12\n");
+			fprintf(fasm, "\t movq $0, %%r11\n");
+			fprintf(fasm, "\t cmovne %%r12, %%%s\n", regStk[top-2]);
+			fprintf(fasm, "\t cmove %%r11, %%%s\n", regStk[top-2]);
+			top--;
+	 }
 	 ;
 
 relational_expr:
