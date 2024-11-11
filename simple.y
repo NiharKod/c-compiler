@@ -470,13 +470,19 @@ statement:
 	 | local_var
 	 | compound_statement
 	 | IF LPARENT {
+		//act 1
+		$<my_nlabel>1=nlabel;
+		nlabel++;
 
 	 } expression RPARENT {
-
+	   //act 2
+	   fprintf(fasm, "\tcmpq $0, %%rbx\n");
+	   fprintf(fasm, "\tje if_false_%d\n", $<my_nlabel>1);
 	 }statement {
-
+		//act 3
+	   fprintf(fasm, "\tif_false_%d:\n", $<my_nlabel>1);
 	 }else_optional {
-		
+		//act 4
 	 }
 	 | WHILE LPARENT {
 		// act 1
