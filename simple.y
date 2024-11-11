@@ -285,7 +285,7 @@ multiplicative_expr:
 	  	fprintf(fasm, "\n\t # /\n");
 		if (top < nregStk) {
 			//move numerator into rax
-			fprintf(fasm, "\tmovq %%%s, %%rax\n", regStk[top-1]);
+			fprintf(fasm, "\tmovq %%%s, %%rax\n", regStk[top-2]);
 			//move 0 into rdx
 			fprintf(fasm, "\tmovq $0, %%rdx\n");
 
@@ -293,7 +293,7 @@ multiplicative_expr:
 			fprintf(fasm,"\tcqto\n");
 
 			//divide on denominator
-			fprintf(fasm,"\tidivq %%%s\n", regStk[top-2]);
+			fprintf(fasm,"\tidivq %%%s\n", regStk[top-1]);
 
 			fprintf(fasm, "\tmovq %%rax, %%%s", regStk[top-2]);
 
