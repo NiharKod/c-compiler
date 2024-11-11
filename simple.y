@@ -250,8 +250,8 @@ relational_expr:
 			fprintf(fasm, "\t jle less\n");
 			fprintf(fasm, "\t movq $1, %%r12\n");
 			fprintf(fasm, "\t movq $0, %%r11\n");
-			fprintf(fasm, "\t cmovl %%r12, %%%s", regStk[top-2]);
-			fprintf(fasm, "\t cmovge %%r11, %%%s", regStk[top-2]);
+			fprintf(fasm, "\t cmovl %%r12, %%%s\n", regStk[top-2]);
+			fprintf(fasm, "\t cmovge %%r11, %%%s\n", regStk[top-2]);
 
 	 }
 	 | relational_expr GREAT additive_expr {
