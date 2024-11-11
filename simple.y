@@ -274,7 +274,13 @@ relational_expr:
 			top--;
 	 }
 	 | relational_expr GREATEQUAL additive_expr {
-
+			fprintf(fasm, "\t # >= \n");
+			fprintf(fasm, "\t cmpq %%%s, %%%s\n", regStk[top-1], regStk[top-2]);
+			fprintf(fasm, "\t movq $1, %%r12\n");
+			fprintf(fasm, "\t movq $0, %%r11\n");
+			fprintf(fasm, "\t cmovge %%r12, %%%s\n", regStk[top-2]);
+			fprintf(fasm, "\t cmovl %%r11, %%%s\n", regStk[top-2]);
+			top--;
 	 }
 	 ;
 
