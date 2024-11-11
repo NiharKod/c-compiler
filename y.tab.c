@@ -1581,7 +1581,7 @@ yyreduce:
   case 33: /* logical_and_expr: logical_and_expr ANDAND equality_expr  */
 #line 238 "simple.y"
                                                  {
-			fprintf(fasm, "\t && == \n");
+			fprintf(fasm, "\t && \n");
 			fprintf(fasm, "\t and %%%s, %%%s\n", regStk[top-1], regStk[top-2]);
 			fprintf(fasm, "\t movq $1, %%r12\n");
 			fprintf(fasm, "\t movq $0, %%r11\n");
