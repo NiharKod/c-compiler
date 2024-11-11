@@ -469,7 +469,15 @@ statement:
 	 | call SEMICOLON { top= 0; /* Reset register stack */ }
 	 | local_var
 	 | compound_statement
-	 | IF LPARENT expression RPARENT statement else_optional
+	 | IF LPARENT {
+
+	 } expression RPARENT {
+
+	 }statement {
+
+	 }else_optional {
+		
+	 }
 	 | WHILE LPARENT {
 		// act 1
 		$<my_nlabel>1=nlabel;
