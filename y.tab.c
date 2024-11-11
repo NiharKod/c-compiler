@@ -1588,13 +1588,13 @@ yyreduce:
   case 39: /* relational_expr: relational_expr GREAT additive_expr  */
 #line 257 "simple.y"
                                                {
-		fprintf(fasm, "\t # < \n");
-			fprintf(fasm, "\t cmpq %%%s, %%%s\n", regStk[top-2], regStk[top-1]);
-			fprintf(fasm, "\t movq $1, %%r12\n");
-			fprintf(fasm, "\t movq $0, %%r11\n");
-			fprintf(fasm, "\t cmovg %%r12, %%%s\n", regStk[top-2]);
-			fprintf(fasm, "\t cmovle %%r11, %%%s\n", regStk[top-2]);
-			top--;
+			// fprintf(fasm, "\t # > \n");
+			// fprintf(fasm, "\t cmpq %%%s, %%%s\n", regStk[top-2], regStk[top-1]);
+			// fprintf(fasm, "\t movq $1, %%r12\n");
+			// fprintf(fasm, "\t movq $0, %%r11\n");
+			// fprintf(fasm, "\t cmovg %%r12, %%%s\n", regStk[top-2]);
+			// fprintf(fasm, "\t cmovle %%r11, %%%s\n", regStk[top-2]);
+			// top--;
 
 	 }
 #line 1601 "y.tab.c"
