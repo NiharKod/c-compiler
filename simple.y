@@ -285,7 +285,7 @@ multiplicative_expr:
 	  	fprintf(fasm, "\n\t # /\n");
 		if (top < nregStk) {
 			//move numerator into rax
-			fprintf(fasm, "\tmovq %%%s, %%rax\n, regStk[top-1]");
+			fprintf(fasm, "\tmovq %%%s, %%rax\n", regStk[top-1]);
 			//move 0 into rdx
 			fprintf(fasm, "\tmovq $0, %%rdx\n");
 
