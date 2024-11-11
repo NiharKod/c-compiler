@@ -4,8 +4,8 @@ local          : Simple Test for Local Variables     : 4   of 4
 args           : Simple Test for Arguments           : 4   of 4  
 return         : Simple Test for Arguments           : 3   of 3  
 nested         : Test for nested function            : 3   of 3  
-div            : Test for division                   : 0   of 3  
-expr           : Test expression                     : 0   of 3  
+div            : Test for division                   : 3   of 3  
+expr           : Test expression                     : 3   of 3  
 expr2          : Test expression and vars            : 3   of 3  
 rel            : Test Relational Operators           : 0   of 3  
 equal          : Test Equality Operators             : 0   of 3  
@@ -30,4 +30,4 @@ char2          : Array char assignment               : 0   of 3
 strlen         : Compute strlen                      : 0   of 3  
 quicksortstr   : Quicksort with strings              : 0   of 4  
 queens         : 8 queens problem                    : 0   of 3  
-                              Total:  21 of 100
+                              Total:  27 of 100
