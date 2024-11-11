@@ -10,7 +10,7 @@ expr2          : Test expression and vars            : 3   of 3
 rel            : Test Relational Operators           : 3   of 3  
 equal          : Test Equality Operators             : 3   of 3  
 and            : Test And Operator                   : 3   of 3  
-or             : Test Or Operator                    : 0   of 3  
+or             : Test Or Operator                    : 3   of 3  
 if             : Test If Statement                   : 0   of 3  
 while          : Test While Statement                : 3   of 3  
 dowhile        : Test Do/While Statement             : 0   of 3  
@@ -30,4 +30,4 @@ char2          : Array char assignment               : 0   of 3
 strlen         : Compute strlen                      : 0   of 3  
 quicksortstr   : Quicksort with strings              : 0   of 4  
 queens         : 8 queens problem                    : 0   of 3  
-                              Total:  39 of 100
+                              Total:  42 of 100
