@@ -301,7 +301,27 @@ multiplicative_expr:
 		}
 	  
 	  }
-	  | multiplicative_expr PERCENT primary_expr {}
+	  | multiplicative_expr PERCENT primary_expr {
+		if (top < nregStk) {
+			//move numerator into rax
+			fprintf(fasm, "\n\t # %%\n");
+
+			fprintf(fasm, "\tmovq %%%s, %%rax\n", regStk[top-2]);
+			//move 0 into rdx
+			fprintf(fasm, "\tmovq $0, %%rdx\n");
+
+			//Sign Extend %rax into %rdx:%rax
+			fprintf(fasm,"\tcqto\n");
+
+			//divide on denominator
+			fprintf(fasm,"\tidivq %%%s\n", regStk[top-1]);
+
+			fprintf(fasm, "\tmovq %%rdx, %%%s", regStk[top-2]);
+
+			top--;
+		}
+
+	  }
 	  ;
 
 primary_expr:
