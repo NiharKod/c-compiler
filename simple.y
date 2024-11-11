@@ -281,8 +281,25 @@ multiplicative_expr:
 			top--;
 		}
           }
-	  | multiplicative_expr DIVIDE primary_expr {}
-	  | multiplicative_expr PERCENT primary_expr
+	  | multiplicative_expr DIVIDE primary_expr {
+	  	fprintf(fasm, "\n\t # /\n");
+		if (top < nregStk) {
+			//move numerator into rax
+			fprintf(fasm, "\tmovq %%%s, %%rax\n, regStk[top-1]");
+			//move 0 into rdx
+			fprintf(fasm, "\tmovq $0, %%rdx\n");
+
+			//Sign Extend %rax into %rdx:%rax
+			fprintf(fasm,"\tcqto\n");
+
+			//divide on denominator
+			fprintf(fasm,"\tidivq %%%s\n", regStk[top-2]);
+
+			top--;
+		}
+	  
+	  }
+	  | multiplicative_expr PERCENT primary_expr {}
 	  ;
 
 primary_expr:
