@@ -54,7 +54,8 @@ char nregStk = sizeof(regStk)/sizeof(char*);
 char *regArgs[]={ "rdi", "rsi", "rdx", "rcx", "r8", "r9"};
 char nregArgs = sizeof(regArgs)/sizeof(char*);
 
-int loop_type = -1;
+int loop_type[] = {-1,-1,-1,-1};
+int loop_top = 0;
 
 int top = 0;
 
@@ -491,7 +492,8 @@ statement:
 		// act 1
 		$<my_nlabel>1=nlabel;
 		nlabel++;
-		loop_type = 0;
+		loop_type[loop_top] = nlabel;
+		loop_top++;
 		fprintf(fasm, "loop_start_%d:\n", $<my_nlabel>1);
          }
          expression RPARENT {
@@ -504,11 +506,13 @@ statement:
 		// act3
 		fprintf(fasm, "\tjmp loop_start_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "loop_end_%d:\n", $<my_nlabel>1);
+		loop_top--;
 	 }
 	 | DO {
 		$<my_nlabel>1=nlabel;
 		nlabel++;
-		loop_type = 1;
+		loop_type[loop_top] = nlabel;
+		loop_top++;
 		fprintf(fasm, "loop_start_%d:\n", $<my_nlabel>1);
 	 }statement WHILE LPARENT expression {
 		
@@ -516,11 +520,13 @@ statement:
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
 		fprintf(fasm, "\t jne loop_start_%d\n", $<my_nlabel>1);
 		top--;
+		loop_top--;
 	 }
 	 | FOR LPARENT assignment  SEMICOLON {
 		$<my_nlabel>1=nlabel;
 		nlabel++;
-		loop_type = 2;
+		loop_type[loop_top] = nlabel;
+		loop_top++;
 		fprintf(fasm, "for_start_%d:\n", $<my_nlabel>1);
 
 
@@ -537,6 +543,7 @@ statement:
 	 } statement {
 		fprintf(fasm, "jmp loop_start_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "\t end_for_%d:\n", $<my_nlabel>1);
+		loop_top--;
 	 }
 	 | jump_statement
 	 ;
@@ -548,18 +555,11 @@ else_optional:
 
 jump_statement:
          CONTINUE SEMICOLON {
-			//  /$<my_nlabel>1=nlabel - 2;
-			// //while
-			// if (loop_type == 0){
-			// 	fprintf(fasm, "\t jmp while_start_%d\n", $<my_nlabel>1);
-			// //do while
-			// } else if (loop_type == 1){
-			// 	//fprintf(fasm, "\t jmp do_while_start_%d\n", $<my_nlabel>1);
-			// //for
-			// } else if (loop_type == 2){
-			// 	//fprintf(fasm, "\t jmp inc_%d\n", $<my_nlabel>1);
 
-			// }
+			//while
+			int n = loop_type[loop_top];
+			fprintf(fasm, "\t jmp loop_start_%d\n", n);
+			
 		 }
 	 | BREAK SEMICOLON {
 
