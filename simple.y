@@ -506,7 +506,6 @@ statement:
 		// act3
 		fprintf(fasm, "\tjmp loop_start_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "loop_end_%d:\n", $<my_nlabel>1);
-		loop_top--;
 	 }
 	 | DO {
 		$<my_nlabel>1=nlabel;
@@ -536,6 +535,7 @@ statement:
 		fprintf(fasm, "\t jmp for_body_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "\t loop_start_%d:\n", $<my_nlabel>1);
 		top--;
+		loop_top--;
 
 	 } assignment RPARENT {
 		fprintf(fasm, "jmp for_start_%d\n", $<my_nlabel>1);
@@ -543,7 +543,7 @@ statement:
 	 } statement {
 		fprintf(fasm, "jmp loop_start_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "\t end_for_%d:\n", $<my_nlabel>1);
-		loop_top--;
+		
 	 }
 	 | jump_statement
 	 ;
@@ -562,6 +562,8 @@ jump_statement:
 			
 		 }
 	 | BREAK SEMICOLON {
+		//int n = loop_type[loop_top];
+		//fprintf(fasm, "\t jmp loop_end_%d\n", n);
 
 	 }
 	 | RETURN expression SEMICOLON {

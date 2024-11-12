@@ -1916,7 +1916,7 @@ yyreduce:
 		// act 1
 		(yyvsp[-1].my_nlabel)=nlabel;
 		nlabel++;
-		loop_type[loop_top] = nlabel;
+		loop_type[loop_top] = (yyvsp[-1].my_nlabel);
 		loop_top++;
 		fprintf(fasm, "loop_start_%d:\n", (yyvsp[-1].my_nlabel));
          }
@@ -1950,7 +1950,7 @@ yyreduce:
               {
 		(yyvsp[0].my_nlabel)=nlabel;
 		nlabel++;
-		loop_type[loop_top] = nlabel;
+		loop_type[loop_top] = (yyvsp[0].my_nlabel);
 		loop_top++;
 		fprintf(fasm, "loop_start_%d:\n", (yyvsp[0].my_nlabel));
 	 }
@@ -1981,7 +1981,7 @@ yyreduce:
                                              {
 		(yyvsp[-3].my_nlabel)=nlabel;
 		nlabel++;
-		loop_type[loop_top] = nlabel;
+		loop_type[loop_top] = (yyvsp[-3].my_nlabel);
 		loop_top++;
 		fprintf(fasm, "for_start_%d:\n", (yyvsp[-3].my_nlabel));
 
