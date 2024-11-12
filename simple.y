@@ -520,8 +520,9 @@ statement:
 		fprintf(fasm, "for_start_%d:\n", $<my_nlabel>1);
 
 	 } expression SEMICOLON {
-		fprintf(fasm, "cmpq $0, %%rbx\n");
-		fprintf(fasm, "jne end_for_%d\n", $<my_nlabel>1);
+		fprintf(fasm, "\tcmpq $0, %%rbx\n");
+		fprintf(fasm, "\tjne end_for_%d\n", $<my_nlabel>1);
+		top--;
 
 	 } assignment RPARENT {
 

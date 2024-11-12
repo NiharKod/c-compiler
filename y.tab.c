@@ -1962,7 +1962,7 @@ yyreduce:
 #line 512 "simple.y"
                              {
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
-		fprintf(fasm, "\t jne do_while_start_%d", (yyvsp[-8].my_nlabel));
+		fprintf(fasm, "\t jne do_while_start_%d\n", (yyvsp[-8].my_nlabel));
 		top--;
 	 }
 #line 1969 "y.tab.c"
