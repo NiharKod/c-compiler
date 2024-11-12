@@ -1946,7 +1946,7 @@ yyreduce:
 #line 510 "simple.y"
                                     {
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
-		fprintf(fasm, "\t jne do_while_start_%d, $<my_nlabel>1");
+		fprintf(fasm, "\t jne do_while_start_%d", (yyvsp[-5].my_nlabel));
 	 }
 #line 1952 "y.tab.c"
     break;
