@@ -503,7 +503,14 @@ statement:
 		fprintf(fasm, "\tjmp while_start_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "while_end_%d:\n", $<my_nlabel>1);
 	 }
-	 | DO statement WHILE LPARENT expression RPARENT SEMICOLON
+	 | DO statement {
+		$<my_nlabel>1=nlabel;
+		nlabel++;
+		fprintf(fasm, "do_while_start_%d:\n", $<my_nlabel>1);
+	 } WHILE LPARENT expression {
+		fprintf(fasm, "\tcmpq $0, %%rbx\n");
+		fprintf(fasm, "\t jne do_while_start_%d, $<my_nlabel>1");
+	 } RPARENT SEMICOLON
 	 | FOR LPARENT assignment SEMICOLON expression
 	   SEMICOLON assignment RPARENT statement
 	 | jump_statement
