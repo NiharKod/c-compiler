@@ -759,7 +759,7 @@ static const yytype_int16 yyrline[] =
      413,   414,   436,   437,   438,   446,   450,   454,   455,   459,
      461,   466,   470,   471,   472,   473,   474,   479,   483,   474,
      491,   500,   491,   512,   519,   512,   527,   536,   544,   527,
-     552,   556,   557,   561,   568,   573
+     552,   556,   557,   561,   569,   574
 };
 #endif
 
@@ -2032,33 +2032,34 @@ yyreduce:
 
 			//while
 			int n = loop_type[loop_top];
+			printf("Loop start %d", loop_type[loop_top]);
 			fprintf(fasm, "\t jmp loop_start_%d\n", n);
 			
 		 }
-#line 2039 "y.tab.c"
+#line 2040 "y.tab.c"
     break;
 
   case 84: /* jump_statement: BREAK SEMICOLON  */
-#line 568 "simple.y"
+#line 569 "simple.y"
                            {
 		//int n = loop_type[loop_top];
 		//fprintf(fasm, "\t jmp loop_end_%d\n", n);
 
 	 }
-#line 2049 "y.tab.c"
+#line 2050 "y.tab.c"
     break;
 
   case 85: /* jump_statement: RETURN expression SEMICOLON  */
-#line 573 "simple.y"
+#line 574 "simple.y"
                                        {
 		 fprintf(fasm, "\tmovq %%rbx, %%rax\n");
 		 top = 0;
 	 }
-#line 2058 "y.tab.c"
+#line 2059 "y.tab.c"
     break;
 
 
-#line 2062 "y.tab.c"
+#line 2063 "y.tab.c"
 
       default: break;
     }
@@ -2251,7 +2252,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 579 "simple.y"
+#line 580 "simple.y"
 
 
 void yyset_in (FILE *  in_str );
