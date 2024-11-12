@@ -54,6 +54,7 @@ char nregStk = sizeof(regStk)/sizeof(char*);
 char *regArgs[]={ "rdi", "rsi", "rdx", "rcx", "r8", "r9"};
 char nregArgs = sizeof(regArgs)/sizeof(char*);
 
+int loop_type = -1;
 
 int top = 0;
 
@@ -490,6 +491,7 @@ statement:
 		// act 1
 		$<my_nlabel>1=nlabel;
 		nlabel++;
+		loop_type = 0;
 		fprintf(fasm, "while_start_%d:\n", $<my_nlabel>1);
          }
          expression RPARENT {
@@ -506,6 +508,7 @@ statement:
 	 | DO {
 		$<my_nlabel>1=nlabel;
 		nlabel++;
+		loop_type = 1;
 		fprintf(fasm, "do_while_start_%d:\n", $<my_nlabel>1);
 	 }statement WHILE LPARENT expression {
 		
@@ -517,6 +520,7 @@ statement:
 	 | FOR LPARENT assignment  SEMICOLON {
 		$<my_nlabel>1=nlabel;
 		nlabel++;
+		loop_type = 2;
 		fprintf(fasm, "for_start_%d:\n", $<my_nlabel>1);
 
 
@@ -543,8 +547,23 @@ else_optional:
          ;
 
 jump_statement:
-         CONTINUE SEMICOLON
-	 | BREAK SEMICOLON
+         CONTINUE SEMICOLON {
+			$<my_nlabel>1=nlabel
+			//while
+			if (loop_type == 0){
+				fprintf(fasm, "\t jmp while_start_%d\n", $<my_nlabel>1);
+			//do while
+			} else if (loop_type == 1){
+				fprintf(fasm, "\t jmp do_while_start_%d\n", $<my_nlabel>1);
+			//for
+			} else if (loop_type == 2){
+				fprintf(fasm, "\t jmp for_start_%d\n", $<my_nlabel>1);
+
+			}
+		 }
+	 | BREAK SEMICOLON {
+
+	 }
 	 | RETURN expression SEMICOLON {
 		 fprintf(fasm, "\tmovq %%rbx, %%rax\n");
 		 top = 0;
