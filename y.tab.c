@@ -2018,7 +2018,7 @@ yyreduce:
   case 83: /* jump_statement: CONTINUE SEMICOLON  */
 #line 550 "simple.y"
                             {
-			(yyvsp[-1].my_nlabel)=nlabel
+			(yyvsp[-1].my_nlabel)=nlabel;
 			//while
 			if (loop_type == 0){
 				fprintf(fasm, "\t jmp while_start_%d\n", (yyvsp[-1].my_nlabel));
