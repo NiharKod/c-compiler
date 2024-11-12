@@ -1947,7 +1947,7 @@ yyreduce:
                                     {
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
 		fprintf(fasm, "\t jne do_while_start_%d", (yyvsp[-5].my_nlabel));
-		top--
+		top--;
 	 }
 #line 1953 "y.tab.c"
     break;
