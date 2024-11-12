@@ -480,9 +480,11 @@ statement:
 	   fprintf(fasm, "\tje if_false_%d\n", $<my_nlabel>1);
 	 }statement {
 		//act 3
+	   fprintf(fasm, "\tjne if_false_after_else_%d\n", $<my_nlabel>1);
 	   fprintf(fasm, "\tif_false_%d:\n", $<my_nlabel>1);
 	 }else_optional {
 		//act 4
+		fprintf(fasm, "\tif_false_after_else_%d:\n", $<my_nlabel>1);
 	 }
 	 | WHILE LPARENT {
 		// act 1
