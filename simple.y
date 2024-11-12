@@ -493,6 +493,7 @@ statement:
 		$<my_nlabel>1=nlabel;
 		nlabel++;
 		loop_type[loop_top] = $<my_nlabel>1;
+		printf("Loop_type %d\n", loop_type[loop_top]);
 		loop_top++;
 		fprintf(fasm, "loop_start_%d:\n", $<my_nlabel>1);
          }
@@ -506,11 +507,13 @@ statement:
 		// act3
 		fprintf(fasm, "\tjmp loop_start_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "loop_end_%d:\n", $<my_nlabel>1);
+		loop_top--;
 	 }
 	 | DO {
 		$<my_nlabel>1=nlabel;
 		nlabel++;
 		loop_type[loop_top] = $<my_nlabel>1;
+		printf("Loop_type %d\n", loop_type[loop_top]);
 		loop_top++;
 		fprintf(fasm, "loop_start_%d:\n", $<my_nlabel>1);
 	 }statement WHILE LPARENT expression {
@@ -525,6 +528,7 @@ statement:
 		$<my_nlabel>1=nlabel;
 		nlabel++;
 		loop_type[loop_top] = $<my_nlabel>1;
+		printf("Loop_type %d\n", loop_type[loop_top]);
 		loop_top++;
 		fprintf(fasm, "for_start_%d:\n", $<my_nlabel>1);
 
