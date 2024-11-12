@@ -756,8 +756,8 @@ static const yytype_int16 yyrline[] =
      300,   309,   321,   322,   330,   342,   343,   351,   371,   395,
      411,   412,   434,   435,   436,   444,   448,   452,   453,   457,
      459,   464,   468,   469,   470,   471,   472,   477,   481,   472,
-     489,   495,   489,   506,   510,   506,   517,   522,   527,   517,
-     533,   537,   538,   542,   543,   544
+     489,   495,   489,   506,   510,   506,   517,   523,   530,   517,
+     537,   541,   542,   546,   547,   548
 };
 #endif
 
@@ -1975,49 +1975,53 @@ yyreduce:
 		nlabel++;
 		fprintf(fasm, "for_start_%d:\n", (yyvsp[-3].my_nlabel));
 
+
 	 }
-#line 1980 "y.tab.c"
+#line 1981 "y.tab.c"
     break;
 
   case 77: /* $@10: %empty  */
-#line 522 "simple.y"
+#line 523 "simple.y"
                                 {
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
 		fprintf(fasm, "\tje end_for_%d\n", (yyvsp[-6].my_nlabel));
+		fprintf(fasm, "\t jmp for_body_%d\n, $<my_nlabel>1");
+		fprintf(fasm, "\t inc_%d:\n, $<my_nlabel>1");
 		top--;
 
 	 }
-#line 1991 "y.tab.c"
+#line 1994 "y.tab.c"
     break;
 
   case 78: /* $@11: %empty  */
-#line 527 "simple.y"
+#line 530 "simple.y"
                               {
-
+		fprintf(fasm, "jmp for_start_%d:\n", (yyvsp[-9].my_nlabel));
+		fprintf(fasm, "for_body_%d:\n", (yyvsp[-9].my_nlabel));
 	 }
-#line 1999 "y.tab.c"
+#line 2003 "y.tab.c"
     break;
 
   case 79: /* statement: FOR LPARENT assignment SEMICOLON $@9 expression SEMICOLON $@10 assignment RPARENT $@11 statement  */
-#line 529 "simple.y"
+#line 533 "simple.y"
                      {
-		fprintf(fasm, "jmp for_start_%d\n", (yyvsp[-11].my_nlabel));
+		fprintf(fasm, "jmp inc_%d\n", (yyvsp[-11].my_nlabel));
 		fprintf(fasm, "\t end_for_%d:\n", (yyvsp[-11].my_nlabel));
 	 }
-#line 2008 "y.tab.c"
+#line 2012 "y.tab.c"
     break;
 
   case 85: /* jump_statement: RETURN expression SEMICOLON  */
-#line 544 "simple.y"
+#line 548 "simple.y"
                                        {
 		 fprintf(fasm, "\tmovq %%rbx, %%rax\n");
 		 top = 0;
 	 }
-#line 2017 "y.tab.c"
+#line 2021 "y.tab.c"
     break;
 
 
-#line 2021 "y.tab.c"
+#line 2025 "y.tab.c"
 
       default: break;
     }
@@ -2210,7 +2214,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 550 "simple.y"
+#line 554 "simple.y"
 
 
 void yyset_in (FILE *  in_str );
