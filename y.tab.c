@@ -758,8 +758,8 @@ static const yytype_int16 yyrline[] =
      302,   311,   323,   324,   332,   344,   345,   353,   373,   397,
      413,   414,   436,   437,   438,   446,   450,   454,   455,   459,
      461,   466,   470,   471,   472,   473,   474,   479,   483,   474,
-     491,   500,   491,   512,   519,   512,   527,   536,   544,   527,
-     552,   556,   557,   561,   569,   574
+     491,   500,   491,   512,   519,   512,   526,   535,   543,   526,
+     551,   555,   556,   560,   568,   573
 };
 #endif
 
@@ -1941,7 +1941,7 @@ yyreduce:
 		// act3
 		fprintf(fasm, "\tjmp loop_start_%d\n", (yyvsp[-6].my_nlabel));
 		fprintf(fasm, "loop_end_%d:\n", (yyvsp[-6].my_nlabel));
-		loop_top--;
+		//loop_top--;
 	 }
 #line 1947 "y.tab.c"
     break;
@@ -1962,7 +1962,7 @@ yyreduce:
   case 74: /* $@8: %empty  */
 #line 519 "simple.y"
                                              {
-		
+		//loop_top--;
 	 }
 #line 1968 "y.tab.c"
     break;
@@ -1973,13 +1973,12 @@ yyreduce:
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
 		fprintf(fasm, "\t jne loop_start_%d\n", (yyvsp[-8].my_nlabel));
 		top--;
-		loop_top--;
 	 }
-#line 1979 "y.tab.c"
+#line 1978 "y.tab.c"
     break;
 
   case 76: /* $@9: %empty  */
-#line 527 "simple.y"
+#line 526 "simple.y"
                                              {
 		(yyvsp[-3].my_nlabel)=nlabel;
 		nlabel++;
@@ -1990,44 +1989,44 @@ yyreduce:
 
 
 	 }
-#line 1994 "y.tab.c"
+#line 1993 "y.tab.c"
     break;
 
   case 77: /* $@10: %empty  */
-#line 536 "simple.y"
+#line 535 "simple.y"
                                 {
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
 		fprintf(fasm, "\tje end_for_%d\n", (yyvsp[-6].my_nlabel));
 		fprintf(fasm, "\t jmp for_body_%d\n", (yyvsp[-6].my_nlabel));
 		fprintf(fasm, "\t loop_start_%d:\n", (yyvsp[-6].my_nlabel));
 		top--;
-		loop_top--;
+		//loop_top--;
 
 	 }
-#line 2008 "y.tab.c"
+#line 2007 "y.tab.c"
     break;
 
   case 78: /* $@11: %empty  */
-#line 544 "simple.y"
+#line 543 "simple.y"
                               {
 		fprintf(fasm, "jmp for_start_%d\n", (yyvsp[-9].my_nlabel));
 		fprintf(fasm, "for_body_%d:\n", (yyvsp[-9].my_nlabel));
 	 }
-#line 2017 "y.tab.c"
+#line 2016 "y.tab.c"
     break;
 
   case 79: /* statement: FOR LPARENT assignment SEMICOLON $@9 expression SEMICOLON $@10 assignment RPARENT $@11 statement  */
-#line 547 "simple.y"
+#line 546 "simple.y"
                      {
 		fprintf(fasm, "jmp loop_start_%d\n", (yyvsp[-11].my_nlabel));
 		fprintf(fasm, "\t end_for_%d:\n", (yyvsp[-11].my_nlabel));
 		
 	 }
-#line 2027 "y.tab.c"
+#line 2026 "y.tab.c"
     break;
 
   case 83: /* jump_statement: CONTINUE SEMICOLON  */
-#line 561 "simple.y"
+#line 560 "simple.y"
                             {
 
 			//while
@@ -2036,30 +2035,30 @@ yyreduce:
 			fprintf(fasm, "\t jmp loop_start_%d\n", n);
 			
 		 }
-#line 2040 "y.tab.c"
+#line 2039 "y.tab.c"
     break;
 
   case 84: /* jump_statement: BREAK SEMICOLON  */
-#line 569 "simple.y"
+#line 568 "simple.y"
                            {
 		//int n = loop_type[loop_top];
 		//fprintf(fasm, "\t jmp loop_end_%d\n", n);
 
 	 }
-#line 2050 "y.tab.c"
+#line 2049 "y.tab.c"
     break;
 
   case 85: /* jump_statement: RETURN expression SEMICOLON  */
-#line 574 "simple.y"
+#line 573 "simple.y"
                                        {
 		 fprintf(fasm, "\tmovq %%rbx, %%rax\n");
 		 top = 0;
 	 }
-#line 2059 "y.tab.c"
+#line 2058 "y.tab.c"
     break;
 
 
-#line 2063 "y.tab.c"
+#line 2062 "y.tab.c"
 
       default: break;
     }
@@ -2252,7 +2251,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 580 "simple.y"
+#line 579 "simple.y"
 
 
 void yyset_in (FILE *  in_str );
