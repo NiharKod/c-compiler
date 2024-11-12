@@ -539,7 +539,6 @@ statement:
 		fprintf(fasm, "\t jmp for_body_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "\t loop_start_%d:\n", $<my_nlabel>1);
 		top--;
-		loop_top--;
 
 	 } assignment RPARENT {
 		fprintf(fasm, "jmp for_start_%d\n", $<my_nlabel>1);
@@ -547,6 +546,7 @@ statement:
 	 } statement {
 		fprintf(fasm, "jmp loop_start_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "\t end_for_%d:\n", $<my_nlabel>1);
+		loop_top--;
 		
 	 }
 	 | jump_statement
