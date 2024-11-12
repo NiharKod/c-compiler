@@ -514,8 +514,21 @@ statement:
 		fprintf(fasm, "\t jne do_while_start_%d", $<my_nlabel>1);
 		top--;
 	 }
-	 | FOR LPARENT assignment SEMICOLON expression
-	   SEMICOLON assignment RPARENT statement
+	 | FOR LPARENT assignment  SEMICOLON {
+		$<my_nlabel>1=nlabel;
+		nlabel++;
+		fprintf(fasm, "for_start_%d:\n", $<my_nlabel>1);
+
+	 } expression SEMICOLON {
+		fprintf(fasm, "cmpq $0, %%rbx\n");
+		fprintf(fasm, "jne end_for_%d\n", $<my_nlabel>1);
+
+	 } assignment RPARENT {
+
+	 } statement {
+		fprintf(fasm, "jmp for_start_%d:\n", $<my_nlabel>1);
+		printf(fasm, "\t end_for_%d:\n", $<my_nlabel>1);
+	 }
 	 | jump_statement
 	 ;
 
