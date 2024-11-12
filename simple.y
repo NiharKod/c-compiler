@@ -503,11 +503,11 @@ statement:
 		fprintf(fasm, "\tjmp while_start_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "while_end_%d:\n", $<my_nlabel>1);
 	 }
-	 | DO statement {
+	 | DO {
 		$<my_nlabel>1=nlabel;
 		nlabel++;
 		fprintf(fasm, "do_while_start_%d:\n", $<my_nlabel>1);
-	 } WHILE LPARENT expression {
+	 }statement WHILE LPARENT expression {
 		
 	 } RPARENT SEMICOLON {
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
