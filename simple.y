@@ -554,7 +554,7 @@ jump_statement:
 				fprintf(fasm, "\t jmp while_start_%d\n", $<my_nlabel>1);
 			//do while
 			} else if (loop_type == 1){
-				fprintf(fasm, "\t jmp do_while_start_%d\n", $<my_nlabel>1);
+				//fprintf(fasm, "\t jmp do_while_start_%d\n", $<my_nlabel>1);
 			//for
 			} else if (loop_type == 2){
 				fprintf(fasm, "\t jmp for_start_%d\n", $<my_nlabel>1);
