@@ -519,15 +519,19 @@ statement:
 		nlabel++;
 		fprintf(fasm, "for_start_%d:\n", $<my_nlabel>1);
 
+
 	 } expression SEMICOLON {
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
 		fprintf(fasm, "\tje end_for_%d\n", $<my_nlabel>1);
+		fprintf(fasm, "\t jmp for_body_%d\n, $<my_nlabel>1");
+		fprintf(fasm, "\t inc_%d:\n, $<my_nlabel>1");
 		top--;
 
 	 } assignment RPARENT {
-
+		fprintf(fasm, "jmp for_start_%d:\n", $<my_nlabel>1);
+		fprintf(fasm, "for_body_%d:\n", $<my_nlabel>1);
 	 } statement {
-		fprintf(fasm, "jmp for_start_%d\n", $<my_nlabel>1);
+		fprintf(fasm, "jmp inc_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "\t end_for_%d:\n", $<my_nlabel>1);
 	 }
 	 | jump_statement
