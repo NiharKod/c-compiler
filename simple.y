@@ -507,7 +507,7 @@ statement:
 		// act3
 		fprintf(fasm, "\tjmp loop_start_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "loop_end_%d:\n", $<my_nlabel>1);
-		loop_top--;
+		//loop_top--;
 	 }
 	 | DO {
 		$<my_nlabel>1=nlabel;
@@ -517,12 +517,11 @@ statement:
 		loop_top++;
 		fprintf(fasm, "loop_start_%d:\n", $<my_nlabel>1);
 	 }statement WHILE LPARENT expression {
-		
+		//loop_top--;
 	 } RPARENT SEMICOLON {
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
 		fprintf(fasm, "\t jne loop_start_%d\n", $<my_nlabel>1);
 		top--;
-		loop_top--;
 	 }
 	 | FOR LPARENT assignment  SEMICOLON {
 		$<my_nlabel>1=nlabel;
@@ -539,7 +538,7 @@ statement:
 		fprintf(fasm, "\t jmp for_body_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "\t loop_start_%d:\n", $<my_nlabel>1);
 		top--;
-		loop_top--;
+		//loop_top--;
 
 	 } assignment RPARENT {
 		fprintf(fasm, "jmp for_start_%d\n", $<my_nlabel>1);
