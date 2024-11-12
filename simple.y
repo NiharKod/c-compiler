@@ -491,7 +491,7 @@ statement:
 	 | WHILE LPARENT {
 		// act 1
 		$<my_nlabel>1=nlabel;
-		loop_type[loop_top] = $<my_nlabel>1;
+		loop_type[loop_top] = nlabel;
 		nlabel++;
 		printf("Loop_type %d\n", loop_type[loop_top]);
 		loop_top++;
@@ -511,7 +511,7 @@ statement:
 	 }
 	 | DO {
 		$<my_nlabel>1=nlabel;
-		loop_type[loop_top] = $<my_nlabel>1;
+		loop_type[loop_top] = nlabel;
 		nlabel++;
 		printf("Loop_type %d\n", loop_type[loop_top]);
 		loop_top++;
@@ -524,7 +524,7 @@ statement:
 	 }
 	 | FOR LPARENT assignment  SEMICOLON {
 		$<my_nlabel>1=nlabel;
-		loop_type[loop_top] = $<my_nlabel>1;
+		loop_type[loop_top] =nlabel;
 		nlabel++;
 		printf("Loop_type %d\n", loop_type[loop_top]);
 		loop_top++;
