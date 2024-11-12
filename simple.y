@@ -521,7 +521,7 @@ statement:
 
 	 } expression SEMICOLON {
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
-		fprintf(fasm, "\tjne end_for_%d\n", $<my_nlabel>1);
+		fprintf(fasm, "\tje end_for_%d\n", $<my_nlabel>1);
 		top--;
 
 	 } assignment RPARENT {
