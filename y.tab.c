@@ -2001,7 +2001,7 @@ yyreduce:
 #line 528 "simple.y"
                      {
 		fprintf(fasm, "jmp for_start_%d:\n", (yyvsp[-11].my_nlabel));
-		printf(fasm, "\t end_for_%d:\n", (yyvsp[-11].my_nlabel));
+		fprintf(fasm, "\t end_for_%d:\n", (yyvsp[-11].my_nlabel));
 	 }
 #line 2007 "y.tab.c"
     break;

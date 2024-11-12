@@ -526,7 +526,7 @@ statement:
 	 } assignment RPARENT {
 
 	 } statement {
-		fprintf(fasm, "jmp for_start_%d:\n", $<my_nlabel>1);
+		fprintf(fasm, "jmp for_start_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "\t end_for_%d:\n", $<my_nlabel>1);
 	 }
 	 | jump_statement
