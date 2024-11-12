@@ -511,7 +511,7 @@ statement:
 		
 	 } RPARENT SEMICOLON {
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
-		fprintf(fasm, "\t jne do_while_start_%d", $<my_nlabel>1);
+		fprintf(fasm, "\t jne do_while_start_%d\n", $<my_nlabel>1);
 		top--;
 	 }
 	 | FOR LPARENT assignment  SEMICOLON {

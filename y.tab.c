@@ -2000,7 +2000,7 @@ yyreduce:
   case 79: /* statement: FOR LPARENT assignment SEMICOLON $@9 expression SEMICOLON $@10 assignment RPARENT $@11 statement  */
 #line 528 "simple.y"
                      {
-		fprintf(fasm, "jmp for_start_%d:\n", (yyvsp[-11].my_nlabel));
+		fprintf(fasm, "jmp for_start_%d\n", (yyvsp[-11].my_nlabel));
 		fprintf(fasm, "\t end_for_%d:\n", (yyvsp[-11].my_nlabel));
 	 }
 #line 2007 "y.tab.c"
