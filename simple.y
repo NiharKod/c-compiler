@@ -492,7 +492,7 @@ statement:
 		// act 1
 		$<my_nlabel>1=nlabel;
 		nlabel++;
-		loop_type[loop_top] = nlabel;
+		loop_type[loop_top] = $<my_nlabel>1;
 		loop_top++;
 		fprintf(fasm, "loop_start_%d:\n", $<my_nlabel>1);
          }
@@ -511,7 +511,7 @@ statement:
 	 | DO {
 		$<my_nlabel>1=nlabel;
 		nlabel++;
-		loop_type[loop_top] = nlabel;
+		loop_type[loop_top] = $<my_nlabel>1;
 		loop_top++;
 		fprintf(fasm, "loop_start_%d:\n", $<my_nlabel>1);
 	 }statement WHILE LPARENT expression {
@@ -525,7 +525,7 @@ statement:
 	 | FOR LPARENT assignment  SEMICOLON {
 		$<my_nlabel>1=nlabel;
 		nlabel++;
-		loop_type[loop_top] = nlabel;
+		loop_type[loop_top] = $<my_nlabel>1;
 		loop_top++;
 		fprintf(fasm, "for_start_%d:\n", $<my_nlabel>1);
 
