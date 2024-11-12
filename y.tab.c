@@ -753,8 +753,8 @@ static const yytype_int16 yyrline[] =
      300,   309,   321,   322,   330,   342,   343,   351,   371,   395,
      411,   412,   434,   435,   436,   444,   448,   452,   453,   457,
      459,   464,   468,   469,   470,   471,   472,   477,   481,   472,
-     489,   495,   489,   506,   510,   506,   514,   516,   520,   521,
-     525,   526,   527
+     489,   495,   489,   506,   510,   506,   515,   517,   521,   522,
+     526,   527,   528
 };
 #endif
 
@@ -1947,21 +1947,22 @@ yyreduce:
                                     {
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
 		fprintf(fasm, "\t jne do_while_start_%d", (yyvsp[-5].my_nlabel));
+		top--
 	 }
-#line 1952 "y.tab.c"
+#line 1953 "y.tab.c"
     break;
 
   case 82: /* jump_statement: RETURN expression SEMICOLON  */
-#line 527 "simple.y"
+#line 528 "simple.y"
                                        {
 		 fprintf(fasm, "\tmovq %%rbx, %%rax\n");
 		 top = 0;
 	 }
-#line 1961 "y.tab.c"
+#line 1962 "y.tab.c"
     break;
 
 
-#line 1965 "y.tab.c"
+#line 1966 "y.tab.c"
 
       default: break;
     }
@@ -2154,7 +2155,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 533 "simple.y"
+#line 534 "simple.y"
 
 
 void yyset_in (FILE *  in_str );

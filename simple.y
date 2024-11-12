@@ -510,7 +510,7 @@ statement:
 	 } WHILE LPARENT expression {
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
 		fprintf(fasm, "\t jne do_while_start_%d", $<my_nlabel>1);
-		top--
+		top--;
 	 } RPARENT SEMICOLON
 	 | FOR LPARENT assignment SEMICOLON expression
 	   SEMICOLON assignment RPARENT statement
