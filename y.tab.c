@@ -1915,7 +1915,7 @@ yyreduce:
                          {
 		// act 1
 		(yyvsp[-1].my_nlabel)=nlabel;
-		loop_type[loop_top] = (yyvsp[-1].my_nlabel);
+		loop_type[loop_top] = nlabel;
 		nlabel++;
 		printf("Loop_type %d\n", loop_type[loop_top]);
 		loop_top++;
@@ -1950,7 +1950,7 @@ yyreduce:
 #line 512 "simple.y"
               {
 		(yyvsp[0].my_nlabel)=nlabel;
-		loop_type[loop_top] = (yyvsp[0].my_nlabel);
+		loop_type[loop_top] = nlabel;
 		nlabel++;
 		printf("Loop_type %d\n", loop_type[loop_top]);
 		loop_top++;
@@ -1980,7 +1980,7 @@ yyreduce:
 #line 525 "simple.y"
                                              {
 		(yyvsp[-3].my_nlabel)=nlabel;
-		loop_type[loop_top] = (yyvsp[-3].my_nlabel);
+		loop_type[loop_top] =nlabel;
 		nlabel++;
 		printf("Loop_type %d\n", loop_type[loop_top]);
 		loop_top++;

@@ -560,8 +560,8 @@ jump_statement:
          CONTINUE SEMICOLON {
 
 			//while
-			int n = loop_type[loop_top];
-			printf("Loop start %d\n", loop_type[loop_top]);
+			int n = loop_type[loop_top - 1];
+			printf("Loop start %d\n", loop_type[loop_top - 1]);
 			fprintf(fasm, "\t jmp loop_start_%d\n", n);
 			
 		 }
