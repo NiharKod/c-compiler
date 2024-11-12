@@ -1986,7 +1986,7 @@ yyreduce:
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
 		fprintf(fasm, "\tje end_for_%d\n", (yyvsp[-6].my_nlabel));
 		fprintf(fasm, "\t jmp for_body_%d\n", (yyvsp[-6].my_nlabel));
-		fprintf(fasm, "\t inc_%d:\n, $<my_nlabel>1");
+		fprintf(fasm, "\t inc_%d:\n", (yyvsp[-6].my_nlabel));
 		top--;
 
 	 }

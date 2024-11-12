@@ -528,7 +528,7 @@ statement:
 		top--;
 
 	 } assignment RPARENT {
-		fprintf(fasm, "jmp for_start_%d:\n", $<my_nlabel>1);
+		fprintf(fasm, "jmp for_start_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "for_body_%d:\n", $<my_nlabel>1);
 	 } statement {
 		fprintf(fasm, "jmp inc_%d\n", $<my_nlabel>1);
