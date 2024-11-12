@@ -492,29 +492,29 @@ statement:
 		$<my_nlabel>1=nlabel;
 		nlabel++;
 		loop_type = 0;
-		fprintf(fasm, "while_start_%d:\n", $<my_nlabel>1);
+		fprintf(fasm, "loop_start_%d:\n", $<my_nlabel>1);
          }
          expression RPARENT {
 		// act2
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
-		fprintf(fasm, "\tje while_end_%d\n", $<my_nlabel>1);
+		fprintf(fasm, "\tje loop_end_%d\n", $<my_nlabel>1);
 		top--;
          }
          statement {
 		// act3
-		fprintf(fasm, "\tjmp while_start_%d\n", $<my_nlabel>1);
-		fprintf(fasm, "while_end_%d:\n", $<my_nlabel>1);
+		fprintf(fasm, "\tjmp loop_start_%d\n", $<my_nlabel>1);
+		fprintf(fasm, "loop_end_%d:\n", $<my_nlabel>1);
 	 }
 	 | DO {
 		$<my_nlabel>1=nlabel;
 		nlabel++;
 		loop_type = 1;
-		fprintf(fasm, "do_while_start_%d:\n", $<my_nlabel>1);
+		fprintf(fasm, "loop_start_%d:\n", $<my_nlabel>1);
 	 }statement WHILE LPARENT expression {
 		
 	 } RPARENT SEMICOLON {
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
-		fprintf(fasm, "\t jne do_while_start_%d\n", $<my_nlabel>1);
+		fprintf(fasm, "\t jne loop_start_%d\n", $<my_nlabel>1);
 		top--;
 	 }
 	 | FOR LPARENT assignment  SEMICOLON {
@@ -528,14 +528,14 @@ statement:
 		fprintf(fasm, "\tcmpq $0, %%rbx\n");
 		fprintf(fasm, "\tje end_for_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "\t jmp for_body_%d\n", $<my_nlabel>1);
-		fprintf(fasm, "\t inc_%d:\n", $<my_nlabel>1);
+		fprintf(fasm, "\t loop_start_%d:\n", $<my_nlabel>1);
 		top--;
 
 	 } assignment RPARENT {
 		fprintf(fasm, "jmp for_start_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "for_body_%d:\n", $<my_nlabel>1);
 	 } statement {
-		fprintf(fasm, "jmp inc_%d\n", $<my_nlabel>1);
+		fprintf(fasm, "jmp loop_start_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "\t end_for_%d:\n", $<my_nlabel>1);
 	 }
 	 | jump_statement
@@ -548,18 +548,18 @@ else_optional:
 
 jump_statement:
          CONTINUE SEMICOLON {
-			$<my_nlabel>1=nlabel - 2;
-			//while
-			if (loop_type == 0){
-				//fprintf(fasm, "\t jmp while_start_%d\n", $<my_nlabel>1);
-			//do while
-			} else if (loop_type == 1){
-				//fprintf(fasm, "\t jmp do_while_start_%d\n", $<my_nlabel>1);
-			//for
-			} else if (loop_type == 2){
-				//fprintf(fasm, "\t jmp inc_%d\n", $<my_nlabel>1);
+			//  /$<my_nlabel>1=nlabel - 2;
+			// //while
+			// if (loop_type == 0){
+			// 	fprintf(fasm, "\t jmp while_start_%d\n", $<my_nlabel>1);
+			// //do while
+			// } else if (loop_type == 1){
+			// 	//fprintf(fasm, "\t jmp do_while_start_%d\n", $<my_nlabel>1);
+			// //for
+			// } else if (loop_type == 2){
+			// 	//fprintf(fasm, "\t jmp inc_%d\n", $<my_nlabel>1);
 
-			}
+			// }
 		 }
 	 | BREAK SEMICOLON {
 
