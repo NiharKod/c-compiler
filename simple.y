@@ -548,7 +548,7 @@ else_optional:
 
 jump_statement:
          CONTINUE SEMICOLON {
-			$<my_nlabel>1=nlabel
+			$<my_nlabel>1=nlabel;
 			//while
 			if (loop_type == 0){
 				fprintf(fasm, "\t jmp while_start_%d\n", $<my_nlabel>1);
