@@ -521,8 +521,8 @@ statement:
 		fprintf(fasm, "\tcmpq $0, %%%s\n", regStk[top-1]);
 		top--;
 		fprintf(fasm, "\t jne loop_start_%d\n", $<my_nlabel>1);
-		loop_top--;
 		fprintf(fasm, "\t loop_end_%d:", $<my_nlabel>1);
+		loop_top--;
 
 	 }
 	 | FOR LPARENT assignment  SEMICOLON {
