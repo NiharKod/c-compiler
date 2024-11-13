@@ -547,6 +547,7 @@ statement:
 	 } statement {
 		fprintf(fasm, "jmp loop_start_%d\n", $<my_nlabel>1);
 		fprintf(fasm, "end_for_%d:\n", $<my_nlabel>1);
+		fprintf(fasm, "loop_end_%d:", $<my_nlabel>1);
 		loop_top--;
 
 		
