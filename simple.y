@@ -177,8 +177,8 @@ assignment:
 				fprintf(fasm, "\tmovq %%%s, -%d(%%rbp)\n", regStk[top-1], 8 * (local_var + 1));
 				top--;
 			} else {
-				fprintf(fasm, "\tmovq %%rbx, %s\n", id);
-				top = 0;
+				fprintf(fasm, "\tmovq %%%s, %s\n", regStk[top-1], id);
+				top--;
 			}
 
 	
