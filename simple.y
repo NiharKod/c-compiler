@@ -523,7 +523,7 @@ statement:
 		fprintf(fasm, "\t jne loop_start_%d\n", $<my_nlabel>1);
 		loop_top--;
 		fprintf(fasm, "\t loop_end_%d:", $<my_nlabel>1);
-		
+
 	 }
 	 | FOR LPARENT assignment  SEMICOLON {
 		$<my_nlabel>1=nlabel;
@@ -570,7 +570,7 @@ jump_statement:
 		 }
 	 | BREAK SEMICOLON {
 		int n = loop_type[loop_top];
-		printf(fasm, "\t jmp loop_end_%d\n", n);
+		fprintf(fasm, "\t jmp loop_end_%d\n", n);
 
 	 }
 	 | RETURN expression SEMICOLON {
