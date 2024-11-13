@@ -569,7 +569,7 @@ jump_statement:
 			
 		 }
 	 | BREAK SEMICOLON {
-		int n = loop_type[loop_top];
+		int n = loop_type[loop_top - 1];
 		fprintf(fasm, "\t jmp loop_end_%d\n", n);
 
 	 }
