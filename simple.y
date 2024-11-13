@@ -518,7 +518,8 @@ statement:
 		fprintf(fasm, "loop_start_%d:\n", $<my_nlabel>1);
 	 }statement WHILE LPARENT expression {
 	 } RPARENT SEMICOLON {
-		fprintf(fasm, "\tcmpq $0, %%rbx\n");
+		fprintf(fasm, "\tcmpq $0, %%%s\n", regStk[top-1]);
+		top--;
 		fprintf(fasm, "\t jne loop_start_%d\n", $<my_nlabel>1);
 		loop_top--;
 	 }
