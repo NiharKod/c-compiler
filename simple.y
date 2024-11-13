@@ -54,7 +54,7 @@ char nregStk = sizeof(regStk)/sizeof(char*);
 char *regArgs[]={ "rdi", "rsi", "rdx", "rcx", "r8", "r9"};
 char nregArgs = sizeof(regArgs)/sizeof(char*);
 
-int loop_type[] = {-1,-1,-1,-1};
+int loop_type[64];
 int loop_top = 0;
 
 int top = 0;

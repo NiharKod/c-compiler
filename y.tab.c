@@ -2017,7 +2017,7 @@ yyreduce:
 #line 544 "simple.y"
                      {
 		fprintf(fasm, "jmp loop_start_%d\n", (yyvsp[-11].my_nlabel));
-		fprintf(fasm, "ßend_for_%d:\n", (yyvsp[-11].my_nlabel));
+		fprintf(fasm, "end_for_%d:\n", (yyvsp[-11].my_nlabel));
 		loop_top--;
 
 		
