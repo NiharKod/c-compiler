@@ -561,7 +561,7 @@ jump_statement:
 
 			//while
 			int n = loop_type[loop_top - 1];
-			printf("Loop start %d\n", loop_type[loop_top - 1]);
+			//printf("Loop start %d\n", loop_type[loop_top - 1]);
 			fprintf(fasm, "\t jmp loop_start_%d\n", n);
 			
 		 }
