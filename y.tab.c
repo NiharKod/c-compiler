@@ -1515,7 +1515,7 @@ yyreduce:
 			if (nglobals < MAX_GLOBALS){
 				global_vars_table[nglobals] = strdup((yyvsp[0].string_val));
 				if (strcmp(type_var, "CHARSTAR") == 0) {
-					global_type[nglobals] = 1
+					global_type[nglobals] = 1;
 				} else {
 					global_type[nglobal] = 0;
 				}
