@@ -488,7 +488,7 @@ primary_expr:
 				}
 				}
 
-				if (global_var_table[global_var] == 8) {
+				if (global_var_type[global_var] == 8) {
 					fprintf(fasm, "($%s, %%%s, 8)\n", id, regStk[top-1]);
 				} else {
 					fprintf(fasm, "($%s, %%%s, 1)\n", id, regStk[top-1]);
