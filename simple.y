@@ -163,15 +163,15 @@ global_var_list: WORD {
         ;
 
 var_type: CHARSTAR {
-	type_var = strdup($<string_val>1);
+	type_var = 1
 }| CHARSTARSTAR {
-	type_var = strdup($<string_val>2);
+	type_var = 8;
 } | LONG {
-	type_var = strdup($<string_val>3);
+	type_var = 8;
 }| LONGSTAR{
-	type_var = strdup($<string_val>4);
+	type_var = 8;
 } | VOID {
-	type_var = strdup($<string_val>5);
+	type_var = 8;
 }
 
 assignment:
