@@ -1498,7 +1498,7 @@ yyreduce:
 				if (strcmp(type_var, "CHARSTAR") == 0) {
 					global_type[nglobals] = 1
 				} else {
-					global_type[nglobal] = 0;
+					global_type[nglobals] = 0;
 				}
 				nglobals++;
 				fprintf(fasm, ".data\n .comm %s, 8\n", (yyvsp[0].string_val));
@@ -1517,7 +1517,7 @@ yyreduce:
 				if (strcmp(type_var, "CHARSTAR") == 0) {
 					global_type[nglobals] = 1;
 				} else {
-					global_type[nglobal] = 0;
+					global_type[nglobals] = 0;
 				}
 				nglobals++;
 				fprintf(fasm, " .comm %s, 8\n", (yyvsp[0].string_val));
