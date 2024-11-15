@@ -454,6 +454,47 @@ primary_expr:
 	  }
 	  | WORD LBRACE expression RBRACE {
 
+		//long a[5*5] = 10
+
+		char * id = $<string_val>1;
+		  // ID may be local or global variable
+		  // Assume it is a global variable
+		  // TODO: Implement also local variables
+		  int local_var = -1;
+		  for (int i = 0; i < nlocals; i++){
+			if (strcmp(id, local_vars_table[i]) == 0){
+				local_var = i;
+				break;
+			}
+		  }
+
+		  if (local_var != -1){
+			//means it is local variable
+			fprintf(fasm, "movq -%d(%%rbp), %%%s\n", 8 * (local_var + 1), regStk[top]);
+			top++;
+			if (local_var_type[local_var] == 8) {
+				fprintf(fasm, "(%%%s, %%%s, 8)\n", regStk[top-1], regStk[top-1]);
+			} else {
+				fprintf(fasm, "(%%%s, %%%s, 1)\n", regStk[top-1], regStk[top-1]);
+			}
+		  }
+		  else {
+				//need to find the index of the global var
+				int global_var = -1;
+				for (int i = 0; i < nglobals; i++){
+				if (strcmp(id, global_vars_table[i]) == 0){
+					global_var = i;
+					break;
+				}
+				}
+
+				if (global_var_table[global_var] == 8) {
+					fprintf(fasm, "($%s, %%%s, 8)\n", id, regStk[top-1]);
+				} else {
+					fprintf(fasm, "($%s, %%%s, 1)\n", id, regStk[top-1]);
+				}
+		   }
+		  top--;
 	  }
 	  | AMPERSAND WORD
 	  | INTEGER_CONST {
