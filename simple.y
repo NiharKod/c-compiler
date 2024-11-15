@@ -36,7 +36,7 @@ FILE * fasm;
 int nargs;
 char * args_table[MAX_ARGS];
 
-char * type_var;
+int type_var;
 #define MAX_GLOBALS 100
 int nglobals = 0;
 char * global_vars_table[MAX_GLOBALS];
@@ -163,7 +163,7 @@ global_var_list: WORD {
         ;
 
 var_type: CHARSTAR {
-	type_var = 1
+	type_var = 1;
 }| CHARSTARSTAR {
 	type_var = 8;
 } | LONG {
