@@ -146,6 +146,7 @@ global_var_list: WORD {
 			// check if there is enough space
 			if (nglobals < MAX_GLOBALS){
 				global_vars_table[nglobals] = strdup($1);
+				global_vars_type[nglobals] = type_var;
 				nglobals++;
 				fprintf(fasm, ".data\n .comm %s, 8\n", $1);
 			} 
@@ -155,6 +156,7 @@ global_var_list: WORD {
 			// check if there is enough space
 			if (nglobals < MAX_GLOBALS){
 				global_vars_table[nglobals] = strdup($3);
+				global_vars_type[nglobals] = type_var;
 				nglobals++;
 				fprintf(fasm, " .comm %s, 8\n", $3);
 			}
