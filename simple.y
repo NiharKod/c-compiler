@@ -132,6 +132,7 @@ arguments:
 arg: var_type WORD {
 	if (nlocals < MAX_LOCALS){
 		local_vars_table[nlocals] = strdup($2);
+		local_vars_type[nglobals] = type_var;
 		fprintf(fasm, "\tmovq %%%s, -%d(%%rbp)\n", regArgs[nargs], 8*(nlocals+1));
 		nargs++;
 		nlocals++;
@@ -481,6 +482,7 @@ local_var:
 local_var_list: WORD {
 			assert(nlocals < MAX_LOCALS);
 			local_vars_table[nlocals] = $<string_val>1;
+			local_vars_type[nglobals] = type_var;
 			nlocals++;
 		}
         | local_var_list COMA WORD
