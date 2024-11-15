@@ -337,7 +337,7 @@ FILE * fasm;
 int nargs;
 char * args_table[MAX_ARGS];
 
-char [] var_type;
+char [] type_var;
 #define MAX_GLOBALS 100
 int nglobals = 0;
 char * global_vars_table[MAX_GLOBALS];
@@ -1515,7 +1515,7 @@ yyreduce:
   case 17: /* var_type: CHARSTAR  */
 #line 165 "simple.y"
                    {
-	var_type = strdup((yyvsp[0].string_val));
+	type_var = strdup((yyvsp[0].string_val));
 }
 #line 1521 "y.tab.c"
     break;
@@ -1523,7 +1523,7 @@ yyreduce:
   case 18: /* var_type: CHARSTARSTAR  */
 #line 167 "simple.y"
                 {
-	var_type = strdup((yyvsp[0].string_val));
+	type_var = strdup((yyvsp[0].string_val));
 }
 #line 1529 "y.tab.c"
     break;
@@ -1531,7 +1531,7 @@ yyreduce:
   case 19: /* var_type: LONG  */
 #line 169 "simple.y"
          {
-	var_type = strdup((yyvsp[0].string_val));
+	type_var = strdup((yyvsp[0].string_val));
 }
 #line 1537 "y.tab.c"
     break;
@@ -1539,7 +1539,7 @@ yyreduce:
   case 20: /* var_type: LONGSTAR  */
 #line 171 "simple.y"
            {
-	var_type = strdup((yyvsp[0].string_val));
+	type_var = strdup((yyvsp[0].string_val));
 }
 #line 1545 "y.tab.c"
     break;
@@ -1547,7 +1547,7 @@ yyreduce:
   case 21: /* var_type: VOID  */
 #line 173 "simple.y"
          {
-	var_type = strdup((yyvsp[0].string_val));
+	type_var = strdup((yyvsp[0].string_val));
 }
 #line 1553 "y.tab.c"
     break;

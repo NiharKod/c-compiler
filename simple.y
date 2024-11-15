@@ -36,7 +36,7 @@ FILE * fasm;
 int nargs;
 char * args_table[MAX_ARGS];
 
-char [] type_var;
+char * type_var;
 #define MAX_GLOBALS 100
 int nglobals = 0;
 char * global_vars_table[MAX_GLOBALS];
