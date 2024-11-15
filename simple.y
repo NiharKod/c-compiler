@@ -154,7 +154,7 @@ global_var_list: WORD {
 				if (strcmp(type_var, "CHARSTAR") == 0) {
 					global_type[nglobals] = 1
 				} else {
-					global_type[nglobal] = 0;
+					global_type[nglobals] = 0;
 				}
 				nglobals++;
 				fprintf(fasm, ".data\n .comm %s, 8\n", $1);
@@ -168,7 +168,7 @@ global_var_list: WORD {
 				if (strcmp(type_var, "CHARSTAR") == 0) {
 					global_type[nglobals] = 1;
 				} else {
-					global_type[nglobal] = 0;
+					global_type[nglobals] = 0;
 				}
 				nglobals++;
 				fprintf(fasm, " .comm %s, 8\n", $3);
