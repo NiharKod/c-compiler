@@ -1,22 +1,22 @@
-test1          : Simple Hello Program                : 0   of 1  
-global         : Simple Test for Global Variables    : 0   of 3  
-local          : Simple Test for Local Variables     : 0   of 4  
-args           : Simple Test for Arguments           : 0   of 4  
-return         : Simple Test for Arguments           : 0   of 3  
-nested         : Test for nested function            : 0   of 3  
-div            : Test for division                   : 0   of 3  
-expr           : Test expression                     : 0   of 3  
-expr2          : Test expression and vars            : 0   of 3  
-rel            : Test Relational Operators           : 0   of 3  
-equal          : Test Equality Operators             : 0   of 3  
-and            : Test And Operator                   : 0   of 3  
-or             : Test Or Operator                    : 0   of 3  
-if             : Test If Statement                   : 0   of 3  
-while          : Test While Statement                : 0   of 3  
-dowhile        : Test Do/While Statement             : 0   of 3  
-for            : Test For Statement                  : 0   of 4  
-break          : Test break Statement                : 0   of 3  
-continue       : Test continue Statement             : 0   of 3  
+test1          : Simple Hello Program                : 1   of 1  
+global         : Simple Test for Global Variables    : 3   of 3  
+local          : Simple Test for Local Variables     : 4   of 4  
+args           : Simple Test for Arguments           : 4   of 4  
+return         : Simple Test for Arguments           : 3   of 3  
+nested         : Test for nested function            : 3   of 3  
+div            : Test for division                   : 3   of 3  
+expr           : Test expression                     : 3   of 3  
+expr2          : Test expression and vars            : 3   of 3  
+rel            : Test Relational Operators           : 3   of 3  
+equal          : Test Equality Operators             : 3   of 3  
+and            : Test And Operator                   : 3   of 3  
+or             : Test Or Operator                    : 3   of 3  
+if             : Test If Statement                   : 3   of 3  
+while          : Test While Statement                : 3   of 3  
+dowhile        : Test Do/While Statement             : 3   of 3  
+for            : Test For Statement                  : 4   of 4  
+break          : Test break Statement                : 3   of 3  
+continue       : Test continue Statement             : 3   of 3  
 array          : Test arrays 1                       : 0   of 3  
 array2         : Test arrays 2                       : 0   of 3  
 sum            : Test sum of an array                : 0   of 3  
@@ -30,4 +30,4 @@ char2          : Array char assignment               : 0   of 3
 strlen         : Compute strlen                      : 0   of 3  
 quicksortstr   : Quicksort with strings              : 0   of 4  
 queens         : 8 queens problem                    : 0   of 3  
-                              Total:  0 of 100
+                              Total:  58 of 100

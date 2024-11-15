@@ -38,11 +38,13 @@ char * args_table[MAX_ARGS];
 
 #define MAX_GLOBALS 100
 int nglobals = 0;
-char * global_vars_table[MAX_GLOBALS];
+int global_vars_table[MAX_GLOBALS];
+int global_vars_type[MAX_GLOBALS];
 
 #define MAX_LOCALS 32
 int nlocals = 0;
 char *local_vars_table[MAX_LOCALS];
+int local_vars_type[MAX_LOCALS];
 
 #define MAX_STRINGS 100
 int nstrings = 0;
@@ -437,7 +439,7 @@ primary_expr:
 		  top++;
 	  }
 	  | WORD LBRACE expression RBRACE {
-		
+
 	  }
 	  | AMPERSAND WORD
 	  | INTEGER_CONST {
