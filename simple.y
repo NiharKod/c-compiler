@@ -39,7 +39,7 @@ char * args_table[MAX_ARGS];
 #define MAX_GLOBALS 100
 int nglobals = 0;
 char * global_vars_table[MAX_GLOBALS];
-int global_type[MAX_GLOBALS];
+
 
 #define MAX_LOCALS 32
 int nlocals = 0;
@@ -132,7 +132,7 @@ arguments:
 arg: var_type WORD {
 	if (nlocals < MAX_LOCALS){
 		local_vars_table[nlocals] = strdup($2);
-		if (strcmp(type_var, "CHARSTAR") == 0) {
+		if (strcmp(type_var, "CHARSTAR")) {
 			type_table[nlocals] = 1;
 		} else {
 			type_table[nlocals] = 0;
@@ -151,11 +151,6 @@ global_var_list: WORD {
 			// check if there is enough space
 			if (nglobals < MAX_GLOBALS){
 				global_vars_table[nglobals] = strdup($1);
-				if (strcmp(type_var, "CHARSTAR") == 0) {
-					global_type[nglobals] = 1;
-				} else {
-					global_type[nglobals] = 0;
-				}
 				nglobals++;
 				fprintf(fasm, ".data\n .comm %s, 8\n", $1);
 			} 
@@ -165,11 +160,6 @@ global_var_list: WORD {
 			// check if there is enough space
 			if (nglobals < MAX_GLOBALS){
 				global_vars_table[nglobals] = strdup($3);
-				if (strcmp(type_var, "CHARSTAR") == 0) {
-					global_type[nglobals] = 1;
-				} else {
-					global_type[nglobals] = 0;
-				}
 				nglobals++;
 				fprintf(fasm, " .comm %s, 8\n", $3);
 			}
@@ -494,7 +484,7 @@ local_var:
 local_var_list: WORD {
 			assert(nlocals < MAX_LOCALS);
 			local_vars_table[nlocals] = $<string_val>1;
-			if (strcmp(type_var, "CHARSTAR") == 0) {
+			if (strcmp(type_var, "CHARSTAR")) {
 				type_table[nlocals] = 1;
 			} else {
 				type_table[nlocals] = 0;
