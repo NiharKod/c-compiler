@@ -40,12 +40,9 @@ char * args_table[MAX_ARGS];
 int nglobals = 0;
 char * global_vars_table[MAX_GLOBALS];
 
-
 #define MAX_LOCALS 32
 int nlocals = 0;
 char *local_vars_table[MAX_LOCALS];
-char *type_var;
-int type_table[MAX_LOCALS];
 
 #define MAX_STRINGS 100
 int nstrings = 0;
@@ -132,11 +129,6 @@ arguments:
 arg: var_type WORD {
 	if (nlocals < MAX_LOCALS){
 		local_vars_table[nlocals] = strdup($2);
-		if (strcmp(type_var, "CHARSTAR")) {
-			type_table[nlocals] = 1;
-		} else {
-			type_table[nlocals] = 0;
-		}
 		fprintf(fasm, "\tmovq %%%s, -%d(%%rbp)\n", regArgs[nargs], 8*(nlocals+1));
 		nargs++;
 		nlocals++;
@@ -167,17 +159,7 @@ global_var_list: WORD {
 }
         ;
 
-var_type: CHARSTAR {
-    type_var = strdup($<string_val>1);
-} | CHARSTARSTAR {
-	 type_var = strdup($<string_val>1);
-} | LONG {
-	 type_var = strdup($<string_val>1);
-} | LONGSTAR {
-	 type_var = strdup($<string_val>1);
-} | VOID {
-	 type_var = strdup($<string_val>1);
-};
+var_type: CHARSTAR | CHARSTARSTAR | LONG | LONGSTAR | VOID;
 
 assignment:
          WORD EQUAL expression {
@@ -455,7 +437,7 @@ primary_expr:
 		  top++;
 	  }
 	  | WORD LBRACE expression RBRACE {
-
+		
 	  }
 	  | AMPERSAND WORD
 	  | INTEGER_CONST {
@@ -484,12 +466,6 @@ local_var:
 local_var_list: WORD {
 			assert(nlocals < MAX_LOCALS);
 			local_vars_table[nlocals] = $<string_val>1;
-			if (strcmp(type_var, "CHARSTAR")) {
-				type_table[nlocals] = 1;
-			} else {
-				type_table[nlocals] = 0;
-			}
-
 			nlocals++;
 		}
         | local_var_list COMA WORD
