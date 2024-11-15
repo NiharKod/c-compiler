@@ -163,16 +163,16 @@ global_var_list: WORD {
         ;
 
 var_type: CHARSTAR {
-	var_type = strdup($<string_val>1)
+	var_type = strdup($<string_val>1);
 }| CHARSTARSTAR {
-	var_type = strdup($<string_val>1)
+	var_type = strdup($<string_val>1);
 } | LONG {
-	var_type = strdup($<string_val>1)
+	var_type = strdup($<string_val>1);
 }| LONGSTAR{
-	var_type = strdup($<string_val>1)
+	var_type = strdup($<string_val>1);
 } | VOID {
-	var_type = strdup($<string_val>1)
-};
+	var_type = strdup($<string_val>1);
+}
 
 assignment:
          WORD EQUAL expression {
