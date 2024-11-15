@@ -340,7 +340,7 @@ char * args_table[MAX_ARGS];
 char [] var_type;
 #define MAX_GLOBALS 100
 int nglobals = 0;
-int global_vars_table[MAX_GLOBALS];
+char * global_vars_table[MAX_GLOBALS];
 int global_vars_type[MAX_GLOBALS];
 
 #define MAX_LOCALS 32
