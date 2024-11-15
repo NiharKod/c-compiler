@@ -36,6 +36,7 @@ FILE * fasm;
 int nargs;
 char * args_table[MAX_ARGS];
 
+char [] var_type;
 #define MAX_GLOBALS 100
 int nglobals = 0;
 int global_vars_table[MAX_GLOBALS];
@@ -161,7 +162,17 @@ global_var_list: WORD {
 }
         ;
 
-var_type: CHARSTAR | CHARSTARSTAR | LONG | LONGSTAR | VOID;
+var_type: CHARSTAR {
+	var_type = strdup($<string_val>1)
+}| CHARSTARSTAR {
+var_type = strdup($<string_val>1)
+} | LONG {
+var_type = strdup($<string_val>1)
+}| LONGSTAR{
+var_type = strdup($<string_val>1)
+} | VOID {
+var_type = strdup($<string_val>1)
+};
 
 assignment:
          WORD EQUAL expression {
