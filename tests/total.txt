@@ -15,7 +15,7 @@ if             : Test If Statement                   : 3   of 3
 while          : Test While Statement                : 3   of 3  
 dowhile        : Test Do/While Statement             : 3   of 3  
 for            : Test For Statement                  : 4   of 4  
-break          : Test break Statement                : 0   of 3  
+break          : Test break Statement                : 3   of 3  
 continue       : Test continue Statement             : 3   of 3  
 array          : Test arrays 1                       : 0   of 3  
 array2         : Test arrays 2                       : 0   of 3  
@@ -30,4 +30,4 @@ char2          : Array char assignment               : 0   of 3
 strlen         : Compute strlen                      : 0   of 3  
 quicksortstr   : Quicksort with strings              : 0   of 4  
 queens         : 8 queens problem                    : 0   of 3  
-                              Total:  55 of 100
+                              Total:  58 of 100

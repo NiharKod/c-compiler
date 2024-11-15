@@ -145,7 +145,7 @@ global_var_list: WORD {
 				global_vars_table[nglobals] = strdup($1);
 				nglobals++;
 				fprintf(fasm, ".data\n .comm %s, 8\n", $1);
-			}
+			} 
 			//exit if otherwise
         }
 | global_var_list COMA WORD {
@@ -183,7 +183,10 @@ assignment:
 
 	
 		 }
-	 | WORD LBRACE expression RBRACE EQUAL expression
+	 | WORD LBRACE expression RBRACE EQUAL expression {
+		//array
+		
+	 }
 	 ;
 
 call :
