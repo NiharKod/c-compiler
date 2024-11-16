@@ -1915,8 +1915,8 @@ yyreduce:
 		  }
 
 		  if (local_var != -1){
-			fprintf(fasm, "movq -%d(%%rbp), %%rax\n", 8 * (local_var + 1));
-			fprintf(fasm, "movq (%%rax, %%%s, %d), %%%s\n", regStk[top-1], local_vars_type[local_var], regStk[top-1]);
+			fprintf(fasm, "\t movq -%d(%%rbp), %%rax\n", 8 * (local_var + 1));
+			fprintf(fasm, "\t movq (%%rax, %%%s, $%d), %%%s\n", regStk[top-1], local_vars_type[local_var], regStk[top-1]);
 		  }
 		  else {
 				//need to find the index of the global var
@@ -1927,8 +1927,8 @@ yyreduce:
 						break;
 					}
 				}
-			fprintf(fasm, "movq $%%%s, %%rax\n", id);
-			fprintf(fasm, "movq (%%rax, %%%s, %d), %%%s\n", regStk[top-1], global_vars_type[global_var], regStk[top-1]);
+			fprintf(fasm, "\t movq $%%%s, %%rax\n", id);
+			fprintf(fasm, "\t movq (%%rax, %%%s, $%d), %%%s\n", regStk[top-1], global_vars_type[global_var], regStk[top-1]);
 
 		   }
 	  }
