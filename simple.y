@@ -132,7 +132,7 @@ arguments:
 arg: var_type WORD {
 	if (nlocals < MAX_LOCALS){
 		local_vars_table[nlocals] = strdup($2);
-		local_vars_type[nglobals] = type_var;
+		local_vars_type[nlocals] = type_var;
 		fprintf(fasm, "\tmovq %%%s, -%d(%%rbp)\n", regArgs[nargs], 8*(nlocals+1));
 		nargs++;
 		nlocals++;
@@ -225,6 +225,7 @@ assignment:
 				}
 			fprintf(fasm, "\t movq %s, %%rax\n", id);
 			fprintf(fasm, "\t movq %%%s, (%%rax, %%%s, %d)\n", regStk[top-1], regStk[top-2], local_vars_type[local_var]);
+			top-=2;
 
 		   }
 	 }
@@ -539,7 +540,7 @@ local_var:
 local_var_list: WORD {
 			assert(nlocals < MAX_LOCALS);
 			local_vars_table[nlocals] = $<string_val>1;
-			local_vars_type[nglobals] = type_var;
+			local_vars_type[nlocals] = type_var;
 			nlocals++;
 		}
         | local_var_list COMA WORD
