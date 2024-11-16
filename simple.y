@@ -482,7 +482,7 @@ primary_expr:
 					}
 				}
 			fprintf(fasm, "movq $%%%s, %%rax\n", id);
-			fprintf(fasm, "movq (%%rax, %%%s, %d), %%%s\n", regStk[top-1], global_var_type[global_var], regStk[top-1]);
+			fprintf(fasm, "movq (%%rax, %%%s, %d), %%%s\n", regStk[top-1], global_vars_type[global_var], regStk[top-1]);
 
 		   }
 	  }
