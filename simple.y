@@ -200,8 +200,32 @@ assignment:
 	
 		 }
 	 | WORD LBRACE expression RBRACE EQUAL expression {
-		//array
-		
+		char * id = $<string_val>1;
+		int local_var = -1;
+		for (int i = 0; i < nlocals; i++){
+			if (strcmp(id, local_vars_table[i]) == 0){
+				local_var = i;
+				break;
+			}
+		}
+
+		  if (local_var != -1){
+			fprintf(fasm, "\t movq -%d(%%rbp), %%rax\n", 8 * (local_var + 1));
+
+			fprintf(fasm, "\t movq $%d, (%%rax, %%%s, %d), %%%s\n", regStk[top-2], regStk[top-1], local_vars_type[local_var], regStk[top-1]);
+		  }
+		  else {
+				//need to find the index of the global var
+				int global_var = -1;
+				for (int i = 0; i < nglobals; i++){
+					if (strcmp(id, global_vars_table[i]) == 0){
+						global_var = i;
+						break;
+					}
+				}
+			fprintf(fasm, "\t movq %s, %%rax\n", id);
+			fprintf(fasm, "\t movq (%%rax, %%%s, %d), %%%s\n", regStk[top-1], global_vars_type[global_var], regStk[top-1]);
+		   }
 	 }
 	 ;
 
