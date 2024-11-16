@@ -470,7 +470,8 @@ primary_expr:
 
 		  if (local_var != -1){
 			fprintf(fasm, "\t movq -%d(%%rbp), %%rax\n", 8 * (local_var + 1));
-			fprintf(fasm, "\t movq (%%rax, %%%s, %d), %%%s\n", regStk[top-1], local_vars_type[local_var], regStk[top-1]);
+			fprintf(fasm, "\t movq (%%rax, %%%s, %d), %%r11\n", regStk[top-1], local_vars_type[local_var]);
+			fprintf(fasm, "\t movq %%r11, %%%s\n", regStk[top-1]);
 		  }
 		  else {
 				//need to find the index of the global var
