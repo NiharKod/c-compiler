@@ -1,6 +1,7 @@
 
 long sum(long n, long* a) {
-	long i, s;
+	long i;
+	long s;
 	s = 0;
 	for (i=0; i<n; i=i+1) {
 		s = s + a[i];
