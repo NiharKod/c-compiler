@@ -211,7 +211,7 @@ assignment:
 
 		  if (local_var != -1){
 			fprintf(fasm, "\t movq -%d(%%rbp), %%rax\n", 8 * (local_var + 1));
-			fprintf(fasm, "\t movq %%%s, %%r11", regStk[top-2]);
+			fprintf(fasm, "\t movq %%%s, %%r11\n", regStk[top-2]);
 			fprintf(fasm, "\t movq %%%s, (%%rax, %%%s, %d), %%%s\n", "r11", regStk[top-1], local_vars_type[local_var], regStk[top-1]);
 		  }
 		  else {
