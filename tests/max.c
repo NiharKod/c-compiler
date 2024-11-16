@@ -9,6 +9,7 @@ long max(long* a, long n)
 		if (m<a[i]) {
 			m = a[i];
 		}
+		printf("m: %d\n", m);
 	}
 
 	return m;

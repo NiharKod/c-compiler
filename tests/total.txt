@@ -26,8 +26,8 @@ quicksort      : QuickSort of longs                  : 0   of 4
 fact           : Test factorial                      : 0   of 3  
 ampersand      : Test ampersand operator             : 0   of 3  
 char           : Array char access                   : 3   of 3  
-char2          : Array char assignment               : 0   of 3  
+char2          : Array char assignment               : 3   of 3  
 strlen         : Compute strlen                      : 0   of 3  
 quicksortstr   : Quicksort with strings              : 0   of 4  
 queens         : 8 queens problem                    : 0   of 3  
-                              Total:  70 of 100
+                              Total:  73 of 100
