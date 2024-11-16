@@ -646,8 +646,8 @@ yyerror(const char * s)
 int
 main(int argc, char **argv)
 {
-	printf("-------------WARNING: You need to implement global and local vars ------\n");
-	printf("------------- or you may get problems with top------\n");
+	//printf("-------------WARNING: You need to implement global and local vars ------\n");
+	//printf("------------- or you may get problems with top------\n");
 	
 	// Make sure there are enough arguments
 	if (argc <2) {
