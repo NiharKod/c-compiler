@@ -469,32 +469,22 @@ primary_expr:
 		  }
 
 		  if (local_var != -1){
-			//means it is local variable
-			fprintf(fasm, "movq -%d(%%rbp), %%%s\n", 8 * (local_var + 1), regStk[top]);
-			top++;
-			if (local_vars_type[local_var] == 8) {
-				fprintf(fasm, "(%%%s, %%%s, 8)\n", regStk[top-1], regStk[top-1]);
-			} else {
-				fprintf(fasm, "(%%%s, %%%s, 1)\n", regStk[top-1], regStk[top-1]);
-			}
+			fprintf(fasm, "movq -%d(%%rbp), %%rax\n", 8 * (local_var + 1));
+			fprintf(fasm, "movq (%%rax, %%%s, %d), %%%s\n", regStk[top-1], local_vars_type[local_var], regStk[top-1]);
 		  }
 		  else {
 				//need to find the index of the global var
 				int global_var = -1;
 				for (int i = 0; i < nglobals; i++){
-				if (strcmp(id, global_vars_table[i]) == 0){
-					global_var = i;
-					break;
+					if (strcmp(id, global_vars_table[i]) == 0){
+						global_var = i;
+						break;
+					}
 				}
-				}
+			fprintf(fasm, "movq -%d(%%rbp), %%rax\n", 8 * (local_var + 1));
+			fprintf(fasm, "movq (%%rax, %%%s, %d), %%%s\n", regStk[top-1], local_vars_type[local_var], regStk[top-1]);
 
-				if (global_vars_type[global_var] == 8) {
-					fprintf(fasm, "($%s, %%%s, 8)\n", id, regStk[top-1]);
-				} else {
-					fprintf(fasm, "($%s, %%%s, 1)\n", id, regStk[top-1]);
-				}
 		   }
-		  top--;
 	  }
 	  | AMPERSAND WORD
 	  | INTEGER_CONST {
