@@ -564,6 +564,7 @@ statement:
 	 } expression RPARENT {
 	   //act 2
 	   fprintf(fasm, "\tcmpq $0, %%rbx\n");
+	   top--;
 	   fprintf(fasm, "\tje if_false_%d\n", $<my_nlabel>1);
 	 }statement {
 		//act 3
