@@ -86,6 +86,7 @@ function:
          var_type WORD
          {
 		 nlocals = 0;
+		 nargs = 0;
 		 fprintf(fasm, "\t.text\n");
 		 fprintf(fasm, ".globl %s\n", $2);
 		 fprintf(fasm, "%s:\n", $2);
