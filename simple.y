@@ -663,9 +663,17 @@ jump_statement:
 	 }
 	 | RETURN expression SEMICOLON {
 		 fprintf(fasm, "\tmovq %%%s, %%rax\n", regStk[top-1]);
-		 //fprintf(fasm, "\tleave\n");
-		 //fprintf(fasm, "\tret\n");
-		  top = 0;
+		 fprintf(fasm, "# Restore registers\n");
+		 fprintf(fasm, "\tpopq %%r15\n");
+		 fprintf(fasm, "\tpopq %%r14\n");
+		 fprintf(fasm, "\tpopq %%r13\n");
+		 fprintf(fasm, "\tpopq %%r10\n");
+		 fprintf(fasm, "\tpopq %%rbx\n");
+         fprintf(fasm, "\tpopq %%rbx\n");
+		 fprintf(fasm, "\taddq $%d, %%rsp\n", MAX_LOCALS*8);
+         fprintf(fasm, "\tleave\n");
+		 fprintf(fasm, "\tret\n");
+		 top = 0;
 	 }
 	 ;
 
