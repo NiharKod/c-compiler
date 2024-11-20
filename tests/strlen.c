@@ -34,5 +34,4 @@ void main()
 	printf("g=%s\n", g);
 	printf("l=%d\n", mystrlen(g));
 
-	
 }

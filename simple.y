@@ -497,7 +497,6 @@ primary_expr:
 
 		  if (local_var != -1){
 			//check if a[0] is the case, then just output the original base pointer
-
 			fprintf(fasm, "\t movq -%d(%%rbp), %%rax\n", 8 * (local_var + 1));
 			fprintf(fasm, "\t movq (%%rax, %%%s, %d), %%%s\n", regStk[top-1], local_vars_type[local_var], regStk[top-1]);
 		  }
