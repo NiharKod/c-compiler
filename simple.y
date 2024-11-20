@@ -663,6 +663,8 @@ jump_statement:
 	 }
 	 | RETURN expression SEMICOLON {
 		 fprintf(fasm, "\tmovq %%%s, %%rax\n", regStk[top-1]);
+		 frintf(fasnm "\t leave\n");
+	     frintf(fasnm "\t ret\n");
 		 top = 0;
 	 }
 	 ;
