@@ -515,7 +515,7 @@ primary_expr:
 		   }
 	  }
 	  | AMPERSAND WORD {
-		char * id = $<string_val>1;
+		char * id = $<string_val>2;
 
 		int local_var = -1;
 			for (int i = 0; i < nlocals; i++){
@@ -525,9 +525,8 @@ primary_expr:
 			}
 		  }
 		  //we know it is local var
-		  if (local_var != 1){
+		  if (local_var != -1){
 			fprintf(fasm, "\t lea -%d(%%rbp), %%%s", 8 * (local_var + 1), regStk[top]);
-			
 		  } else {
 			
 		  }
