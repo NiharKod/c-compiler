@@ -217,7 +217,7 @@ assignment:
 				top-=2;
 			} else {
 				fprintf(fasm, "\t movq -%d(%%rbp), %%rax\n", 8 * (local_var + 1));
-				fprintf(fasm, "\t movzx %%%s, (%%rax, %%%s, %d)\n", regStk[top-1], regStk[top-2], local_vars_type[local_var]);
+				fprintf(fasm, "\t movq %%%s, (%%rax, %%%s, %d)\n", regStk[top-1], regStk[top-2], local_vars_type[local_var]);
 				top-=2;
 			}
 		  }
@@ -236,7 +236,7 @@ assignment:
 				top-=2;
 			} else {
 				fprintf(fasm, "\t movq %s, %%rax\n", id);
-				fprintf(fasm, "\t movzx %%%s, (%%rax, %%%s, %d)\n", regStk[top-1], regStk[top-2], global_vars_type[global_var]);
+				fprintf(fasm, "\t movq %%%s, (%%rax, %%%s, %d)\n", regStk[top-1], regStk[top-2], global_vars_type[global_var]);
 				top-=2;
 			}
 
