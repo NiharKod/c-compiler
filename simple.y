@@ -664,6 +664,8 @@ jump_statement:
 	 | RETURN expression SEMICOLON {
 		 fprintf(fasm, "\tmovq %%rbx, %%rax\n");
 		 top = 0;
+		 nlocals = 0;
+		 nargs = 0;
 	 }
 	 ;
 
