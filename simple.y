@@ -664,7 +664,6 @@ jump_statement:
 	 | RETURN expression SEMICOLON {
 		 fprintf(fasm, "\tmovq %%%s, %%rax\n", regStk[top-1]);
 		 top = 0;
-		 
 	 }
 	 ;
 
