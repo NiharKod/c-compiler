@@ -514,7 +514,27 @@ primary_expr:
 			fprintf(fasm, "\t movq (%%rax, %%%s, %d), %%%s\n", regStk[top-1], global_vars_type[global_var], regStk[top-1]);
 		   }
 	  }
-	  | AMPERSAND WORD
+	  | AMPERSAND WORD {
+		char * id = $<string_val>1;
+
+		int local_var = -1;
+			for (int i = 0; i < nlocals; i++){
+			if (strcmp(id, local_vars_table[i]) == 0){
+				local_var = i;
+				break;
+			}
+		  }
+		  //we know it is local var
+		  if (local_var != 1){
+			fprintf(fasm, "\t lea -%d(%%rbp), %%%s", 8 * (local_var + 1), regStk[top]);
+			
+		  } else {
+			
+		  }
+
+		  top++;
+
+	  }
 	  | INTEGER_CONST {
 		  fprintf(fasm, "\n\t# push %s\n", $<string_val>1);
 		  if (top<nregStk) {
