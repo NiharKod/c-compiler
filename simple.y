@@ -528,7 +528,7 @@ primary_expr:
 		  if (local_var != -1){
 			fprintf(fasm, "\t lea -%d(%%rbp), %%%s", 8 * (local_var + 1), regStk[top]);
 		  } else {
-			
+			fprintf(fasm, "\t lea %s, %%%s", id, regStk[top]);
 		  }
 
 		  top++;

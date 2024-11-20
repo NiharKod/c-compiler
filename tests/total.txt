@@ -24,10 +24,10 @@ max            : Test max of an array                : 3   of 3
 bubblesort     : Bubble Sort of longs                : 4   of 4  
 quicksort      : QuickSort of longs                  : 4   of 4  
 fact           : Test factorial                      : 3   of 3  
-ampersand      : Test ampersand operator             : 0   of 3  
+ampersand      : Test ampersand operator             : 3   of 3  
 char           : Array char access                   : 3   of 3  
 char2          : Array char assignment               : 3   of 3  
 strlen         : Compute strlen                      : 0   of 3  
 quicksortstr   : Quicksort with strings              : 0   of 4  
 queens         : 8 queens problem                    : 3   of 3  
-                              Total:  90 of 100
+                              Total:  93 of 100
