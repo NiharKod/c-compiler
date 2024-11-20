@@ -662,10 +662,9 @@ jump_statement:
 
 	 }
 	 | RETURN expression SEMICOLON {
-		 fprintf(fasm, "\tmovq %%rbx, %%rax\n");
+		 fprintf(fasm, "\tmovq %%%s, %%rax\n", top-1);
 		 top = 0;
-		 nlocals = 0;
-		 nargs = 0;
+		 
 	 }
 	 ;
 
