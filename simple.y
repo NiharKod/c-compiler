@@ -665,7 +665,7 @@ jump_statement:
 		 fprintf(fasm, "\tmovq %%%s, %%rax\n", regStk[top-1]);
 		 fprintf(fasm, "\tleave\n");
 		 fprintf(fasm, "\tret\n");
-		  top = 0;
+		  top = top -1;
 	 }
 	 ;
 
