@@ -425,7 +425,7 @@ multiplicative_expr:
 			//divide on denominator
 			fprintf(fasm,"\tidivq %%%s\n", regStk[top-1]);
 
-			fprintf(fasm, "\tmovq %%rax, %%%s", regStk[top-2]);
+			fprintf(fasm, "\tmovq %%rax, %%%s\n", regStk[top-2]);
 
 			top--;
 		}
