@@ -1,0 +1,36 @@
+#!/bin/bash
+SOLDIR=../project6-src
+
+if [ ! -f $SOLDIR/scc ]; then
+   echo scc not found
+   exit 1
+fi
+
+for prog in heapsort bubblesort; do
+echo -----------------------------------
+echo Running $prog with scc
+$SOLDIR/scc $prog-test.c
+gcc -static -g -o $prog-scc $prog-test.s
+(time ./$prog-scc )2> time-$prog-scc 
+cat time-$prog-scc
+
+echo -----------------------------------
+echo Running $prog with gcc
+gcc -static -g -o $prog-gcc $prog-test.c
+(time ./$prog-gcc) 2> time-$prog-gcc 
+cat time-$prog-gcc
+
+echo -----------------------------------
+echo Running $prog with clang
+clang -static -g -o $prog-clang $prog-test.c
+(time ./$prog-clang )2> time-$prog-clang 
+cat time-$prog-clang
+done;
+
+for t in time*; do 
+	R=`grep real $t|awk '{print $2;}'`; 
+	printf "%-30s %s\n" $t $R; 
+done
+
+
+
